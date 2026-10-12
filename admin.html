@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KnowMe — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --pink: #ff3d9a; --purple: #a855f7; --cyan: #00e5c4; --txt: #f5eaff; --muted: #a898c4; --glass: rgba(40,24,70,0.55); --line: rgba(168,85,247,0.22); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Quicksand', sans-serif; background: #0a0518; color: var(--txt);
+    min-height: 100vh; font-weight: 600;
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(168,85,247,0.28), transparent 45%),
+      radial-gradient(circle at 88% 15%, rgba(255,61,154,0.22), transparent 45%);
+    background-attachment: fixed; -webkit-font-smoothing: antialiased; }
+  .app { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  .brand { font-family: 'Caveat', cursive; font-size: 36px; font-weight: 700; margin-bottom: 8px;
+    background: linear-gradient(135deg, #ff3d9a, #a855f7, #00e5c4); background-size: 200% 200%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; animation: hue 6s ease infinite; }
+  @keyframes hue { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  h1 { font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+  h2 { font-size: 18px; font-weight: 800; margin: 24px 0 12px; }
+
+  .card { background: var(--glass); border-radius: 20px; padding: 20px;
+    border: 1.5px solid var(--line); backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35); margin-bottom: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .stat { background: var(--glass); border-radius: 18px; padding: 18px;
+    border: 1.5px solid var(--line); text-align: center; backdrop-filter: blur(16px); }
+  .stat-num { font-family: 'Caveat', cursive; font-size: 44px; font-weight: 700; line-height: 1;
+    background: linear-gradient(135deg, #ff3d9a, #a855f7, #00e5c4);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat-label { font-size: 11px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+
+  .btn { padding: 12px 20px; border-radius: 14px; font-family: inherit; font-size: 14px;
+    font-weight: 800; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #ff3d9a, #a855f7); color: #fff; }
+  .btn-ghost { background: var(--glass); border: 1.5px solid var(--line); color: var(--txt); }
+  .btn:active { transform: scale(0.97); }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .field input { width: 100%; padding: 14px 16px; background: rgba(15,8,32,0.6);
+    border: 1.5px solid var(--line); border-radius: 14px; color: var(--txt);
+    font-size: 16px; font-family: inherit; font-weight: 700; outline: none; }
+  .field input:focus { border-color: var(--pink); }
+
+  .row { display: flex; justify-content: space-between; align-items: center;
+    background: var(--glass); border: 1.5px solid var(--line); border-radius: 16px;
+    padding: 14px 18px; margin-bottom: 10px; }
+  .row-info { flex: 1; }
+  .row-name { font-weight: 800; font-size: 15px; }
+  .row-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .row-count { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700;
+    background: linear-gradient(135deg, #ff3d9a, #a855f7);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .muted { color: var(--muted); font-size: 13px; text-align: center; padding: 30px 0; }
+
+  #authScreen { max-width: 380px; margin: 80px auto; text-align: center; }
+  #authScreen .brand { font-size: 42px; }
+  #authScreen h1 { font-size: 18px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
+
+  #mainScreen { display: none; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div id="authScreen">
+    <div class="brand">KnowMe ✧ Admin</div>
+    <h1>Enter password</h1>
+    <div class="card">
+      <div class="field">
+        <input id="pwd" type="password" placeholder="••••••••" autocomplete="off" />
+      </div>
+      <button class="btn" style="width:100%;" id="loginBtn">Unlock</button>
+    </div>
+  </div>
+
+  <div id="mainScreen">
+    <div class="brand">KnowMe ✧ Admin</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <span class="muted" style="padding:0;" id="lastUpdate">—</span>
+      <button class="btn btn-ghost" id="logoutBtn" style="padding:8px 14px;font-size:12px;">Logout</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="sQuizzes">—</div><div class="stat-label">Quizzes</div></div>
+      <div class="stat"><div class="stat-num" id="sResps">—</div><div class="stat-label">Responses</div></div>
+      <div class="stat"><div class="stat-num" id="sAvg">—</div><div class="stat-label">Avg score</div></div>
+    </div>
+
+    <h2>All quizzes</h2>
+    <div id="quizList"><p class="muted">Loading…</p></div>
+
+    <h2>Recent responses</h2>
+    <div id="respList"><p class="muted">Loading…</p></div>
+
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="btn btn-ghost" id="refreshBtn" style="flex:1;">🔄 Refresh</button>
+      <button class="btn btn-ghost" id="clearBtn" style="flex:1;color:#ff5b7f;">⚠ Clear all data</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   CONFIG — Upstash credentials filled in
+   ============================================================ */
+const CONFIG = {
+  UPSTASH_URL: "https://evolved-chimp-224053.upstash.io",
+  UPSTASH_TOKEN: "gQAAAAAAA2s1AAIgcDI1MzI1Y2MxMjc4NDI0ZTlhYjQ3ZDRiMzIyOTUzMWRiYg",
+  ADMIN_PASSWORD: "1"
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function redis(...cmd) {
+  const res = await fetch(CONFIG.UPSTASH_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cmd)
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.result;
+}
+
+function checkAuth() {
+  const ok = sessionStorage.getItem("km.admin") === "1";
+  $("authScreen").style.display = ok ? "none" : "block";
+  $("mainScreen").style.display = ok ? "block" : "none";
+  if (ok) loadData();
+}
+$("loginBtn").onclick = () => {
+  if ($("pwd").value === CONFIG.ADMIN_PASSWORD) {
+    sessionStorage.setItem("km.admin", "1");
+    checkAuth();
+  } else {
+    alert("Wrong password");
+  }
+};
+$("pwd").addEventListener("keydown", e => { if (e.key === "Enter") $("loginBtn").click(); });
+$("logoutBtn").onclick = () => { sessionStorage.removeItem("km.admin"); checkAuth(); };
+
+async function loadData() {
+  $("quizList").innerHTML = '<p class="muted">Loading…</p>';
+  $("respList").innerHTML = '<p class="muted">Loading…</p>';
+
+  let quizIds = [], quizzes = [], allResps = [];
+
+  try {
+    quizIds = await redis("SMEMBERS", "quizzes:all") || [];
+    const quizCommands = quizIds.map(id => ["GET", `quiz:${id}`]);
+    const respCommands = quizIds.map(id => ["LRANGE", `resp:${id}`, 0, -1]);
+    const [qRes, rRes] = await Promise.all([
+      fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
+        method: "POST", headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify(quizCommands)
+      }).then(r => r.json()),
+      fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
+        method: "POST", headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify(respCommands)
+      }).then(r => r.json())
+    ]);
+    quizzes = (qRes || []).map(x => { try { return JSON.parse(x.result); } catch { return null; } }).filter(Boolean);
+    const respArrays = (rRes || []).map(x => Array.isArray(x.result) ? x.result : []);
+    allResps = [];
+    quizzes.forEach((q, i) => {
+      respArrays[i].forEach(raw => {
+        try {
+          const r = JSON.parse(raw);
+          allResps.push({ ...r, quiz_id: q.id, quiz_creator: q.creator });
+        } catch {}
+      });
+    });
+  } catch (e) {
+    console.error(e);
+    $("quizList").innerHTML = '<p class="muted">Failed to load. Check Upstash config.</p>';
+    return;
+  }
+
+  $("sQuizzes").textContent = quizzes.length;
+  $("sResps").textContent = allResps.length;
+  const avg = allResps.length ? (allResps.reduce((s, r) => s + (r.score || 0), 0) / allResps.length).toFixed(1) : "—";
+  $("sAvg").textContent = avg;
+  $("lastUpdate").textContent = "Updated " + new Date().toLocaleTimeString();
+
+  const counts = {};
+  allResps.forEach(r => counts[r.quiz_id] = (counts[r.quiz_id] || 0) + 1);
+
+  if (!quizzes.length) {
+    $("quizList").innerHTML = '<p class="muted">No quizzes yet.</p>';
+  } else {
+    $("quizList").innerHTML = quizzes
+      .sort((a, b) => (counts[b.id] || 0) - (counts[a.id] || 0))
+      .map(q => `
+        <div class="row">
+          <div class="row-info">
+            <div class="row-name">${esc(q.creator)}</div>
+            <div class="row-meta">${q.questions?.length || 0} questions · id <code>${esc(q.id)}</code> · ${new Date(q.created_at || Date.now()).toLocaleString()}</div>
+          </div>
+          <div class="row-count">${counts[q.id] || 0}</div>
+        </div>
+      `).join("");
+  }
+
+  if (!allResps.length) {
+    $("respList").innerHTML = '<p class="muted">No responses yet.</p>';
+  } else {
+    $("respList").innerHTML = allResps
+      .sort((a, b) => (b.at || 0) - (a.at || 0))
+      .slice(0, 30)
+      .map(r => `
+        <div class="row">
+          <div class="row-info">
+            <div class="row-name">${esc(r.guesser || "Anonymous")} <span style="color:var(--muted);font-weight:600;font-size:13px;">on ${esc(r.quiz_creator || "?")}'s quiz</span></div>
+            <div class="row-meta">${new Date(r.at || Date.now()).toLocaleString()}</div>
+          </div>
+          <div class="row-count">${r.score}/${r.total || 10}</div>
+        </div>
+      `).join("");
+  }
+}
+
+$("refreshBtn").onclick = loadData;
+$("clearBtn").onclick = async () => {
+  if (!confirm("Delete ALL quizzes and responses? This cannot be undone.")) return;
+  if (!confirm("Are you REALLY sure?")) return;
+  try {
+    const ids = await redis("SMEMBERS", "quizzes:all") || [];
+    for (const id of ids) {
+      await redis("DEL", `quiz:${id}`);
+      await redis("DEL", `resp:${id}`);
+    }
+    await redis("DEL", "quizzes:all");
+    await redis("DEL", "stats:quizzes");
+    await redis("DEL", "stats:responses");
+    alert("All cleared.");
+    loadData();
+  } catch (e) { alert("Failed: " + e.message); }
+};
+
+checkAuth();
+</script>
+</body>
+</html>
