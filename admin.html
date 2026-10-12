@@ -2,19 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#e8f4ff" />
-<title>BlockMe — will you get blocked?</title>
-<meta name="description" content="Find out if you're on the block list. 1-minute quiz." />
-<meta property="og:title" content="💌 Will you get blocked?" />
-<meta property="og:description" content="Find friends you shouldn't trust. Take the 1-minute quiz." />
-<meta property="og:type" content="website" />
+<title>BlockMe — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sky: #d8ecff;
     --sky-2: #e8f4ff;
-    --cloud: #ffffff;
     --card: #ffffff;
     --line: #c8dff5;
     --txt: #2b3a55;
@@ -28,207 +22,135 @@
     --green: #4dd69d;
     --green-lt: #d0f5e6;
     --red: #ff6b6b;
-    --brown: #a0673f;
-    --brown-lt: #e8c4a0;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { overflow-x: hidden; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Quicksand', 'Baloo 2', -apple-system, sans-serif;
     background: linear-gradient(180deg, #c8e2ff 0%, #d8ecff 30%, #e8f4ff 60%, #f8fcff 100%);
     background-attachment: fixed;
-    color: var(--txt); line-height: 1.5;
-    font-size: 16px; font-weight: 700; min-height: 100vh;
+    color: var(--txt); min-height: 100vh; font-weight: 700;
     -webkit-font-smoothing: antialiased;
     position: relative;
   }
+
   /* clouds */
   .cloud-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .cloud {
-    position: absolute; font-size: 80px; opacity: 0.55;
+    position: absolute; font-size: 80px; opacity: 0.5;
     filter: drop-shadow(0 4px 10px rgba(120, 160, 200, 0.15));
     animation: drift linear infinite;
   }
-  .cloud.c1 { top: 6%; left: -10%; animation-duration: 55s; font-size: 110px; }
-  .cloud.c2 { top: 20%; right: -10%; animation-duration: 75s; font-size: 90px; animation-direction: reverse; }
-  .cloud.c3 { top: 55%; left: -15%; animation-duration: 90s; font-size: 100px; opacity: 0.35; }
-  .cloud.c4 { top: 80%; right: -15%; animation-duration: 65s; font-size: 85px; animation-direction: reverse; opacity: 0.4; }
+  .cloud.c1 { top: 8%; left: -10%; animation-duration: 60s; font-size: 100px; }
+  .cloud.c2 { top: 35%; right: -10%; animation-duration: 80s; font-size: 85px; animation-direction: reverse; }
+  .cloud.c3 { top: 70%; left: -15%; animation-duration: 95s; font-size: 95px; opacity: 0.3; }
   @keyframes drift { from { transform: translateX(0); } to { transform: translateX(140vw); } }
 
-  /* floating hearts */
-  .heart { position: fixed; pointer-events: none; z-index: 0; animation: bob 4s ease-in-out infinite; }
-  .heart.h1 { top: 12%; left: 6%; font-size: 22px; color: var(--pink); }
-  .heart.h2 { top: 30%; right: 8%; font-size: 18px; color: var(--blue); animation-delay: 1.2s; }
-  .heart.h3 { top: 65%; left: 5%; font-size: 20px; color: var(--yellow); animation-delay: 2.4s; }
-  .heart.h4 { top: 82%; right: 6%; font-size: 24px; color: var(--pink); animation-delay: 0.6s; }
-  @keyframes bob { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-14px) rotate(8deg); } }
+  .app { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; position: relative; z-index: 1; }
 
-  .app { max-width: 520px; margin: 0 auto; padding: 20px 16px 40px; position: relative; z-index: 1; }
-  .view { display: none; animation: fade .45s cubic-bezier(.2,.8,.3,1); }
-  .view.active { display: block; }
-  @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-
-  .brand { text-align: center; font-family: 'Baloo 2', cursive; font-size: 36px; font-weight: 800; margin-bottom: 16px;
+  .brand {
+    text-align: center; font-family: 'Baloo 2', cursive;
+    font-size: 40px; font-weight: 800; margin-bottom: 8px;
     color: var(--pink); letter-spacing: -0.02em;
-    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255, 95, 162, 0.15); }
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255, 95, 162, 0.15);
+  }
   .brand span { color: var(--blue); text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(92, 184, 255, 0.15); }
 
-  h1 { font-family: 'Baloo 2', cursive; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 12px; color: var(--txt); }
-  h1 em { font-style: normal; color: var(--pink); }
-  h2 { font-family: 'Baloo 2', cursive; font-size: 26px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
-  .sub { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
-  .center { text-align: center; }
+  h1 { font-family: 'Baloo 2', cursive; font-size: 22px; font-weight: 800; margin-bottom: 24px; color: var(--muted); text-align: center; }
+  h2 { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 800; margin: 24px 0 12px; color: var(--txt); }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 16px 24px; border-radius: 20px; font-family: inherit;
-    font-size: 17px; font-weight: 800; border: none; cursor: pointer;
-    width: 100%; transition: transform .12s, box-shadow .2s;
-    text-decoration: none; color: #fff; }
-  .btn:active { transform: scale(0.96); }
-  .btn:disabled { opacity: .5; pointer-events: none; }
-  .btn-primary { background: linear-gradient(135deg, #ff5fa2, #ff85b8);
-    box-shadow: 0 6px 0 #d83a7e, 0 10px 24px rgba(255, 95, 162, 0.35); }
-  .btn-primary:active { box-shadow: 0 2px 0 #d83a7e, 0 4px 12px rgba(255, 95, 162, 0.3); transform: translateY(2px) scale(0.98); }
-  .btn-blue { background: linear-gradient(135deg, #5cb8ff, #85d0ff);
-    box-shadow: 0 6px 0 #3a95d8, 0 10px 24px rgba(92, 184, 255, 0.35); }
-  .btn-blue:active { box-shadow: 0 2px 0 #3a95d8; transform: translateY(2px) scale(0.98); }
-  .btn-ghost { background: #fff; border: 2px solid var(--line);
-    color: var(--txt); box-shadow: 0 4px 0 rgba(200, 223, 245, 0.6); }
-  .btn-ghost:active { transform: translateY(2px) scale(0.98); box-shadow: 0 2px 0 rgba(200, 223, 245, 0.6); }
-  .btn-sm { padding: 12px 16px; font-size: 14px; border-radius: 14px; }
+  .card {
+    background: #fff; border-radius: 20px; padding: 20px;
+    border: 2px solid var(--line);
+    box-shadow: 0 6px 0 rgba(200, 223, 245, 0.5), 0 12px 28px rgba(120, 160, 200, 0.12);
+    margin-bottom: 14px;
+  }
 
-  .hero-bears { font-size: 96px; text-align: center; margin: 6px 0 16px; line-height: 1; display: flex; justify-content: center; gap: 12px; align-items: flex-end; }
-  .hero-bears span { display: inline-block; animation: bounce 2.4s ease-in-out infinite; }
-  .hero-bears span:nth-child(1) { transform: rotate(-6deg); }
-  .hero-bears span:nth-child(2) { animation-delay: .3s; transform: rotate(6deg); }
-  @keyframes bounce { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .stat {
+    background: #fff; border-radius: 18px; padding: 18px;
+    border: 2px solid var(--line); text-align: center;
+    box-shadow: 0 6px 0 rgba(200, 223, 245, 0.5);
+  }
+  .stat-num {
+    font-family: 'Caveat', cursive; font-size: 52px; font-weight: 700; line-height: 1;
+    color: var(--pink);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px;
+  }
 
-  .chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 18px 0; }
-  .chip { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 800;
-    background: #fff; border: 2px solid var(--line);
-    box-shadow: 0 3px 0 rgba(200, 223, 245, 0.6); }
-  .chip.pink { color: var(--pink); border-color: var(--pink-lt); }
-  .chip.blue { color: var(--blue); border-color: var(--blue-lt); }
-  .chip.yellow { color: #b8821c; border-color: var(--yellow-lt); }
+  .btn {
+    padding: 12px 20px; border-radius: 14px; font-family: inherit;
+    font-size: 14px; font-weight: 800; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #ff5fa2, #ff85b8); color: #fff;
+    box-shadow: 0 4px 0 #d83a7e;
+    transition: transform .1s;
+  }
+  .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #d83a7e; }
+  .btn-ghost {
+    background: #fff; border: 2px solid var(--line); color: var(--txt);
+    box-shadow: 0 4px 0 rgba(200, 223, 245, 0.6);
+  }
+  .btn-ghost:active { box-shadow: 0 2px 0 rgba(200, 223, 245, 0.6); }
+  .btn-danger { color: var(--red); }
 
-  .card { background: #fff; border-radius: 22px; padding: 20px;
-    margin-bottom: 14px; border: 2px solid var(--line);
-    box-shadow: 0 6px 0 rgba(200, 223, 245, 0.5), 0 12px 28px rgba(120, 160, 200, 0.12); }
-
-  .field { margin-bottom: 16px; }
-  .field label { display: block; font-size: 12px; font-weight: 800; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-  .field input { width: 100%; padding: 15px 18px; background: #f7fbff;
-    border: 2px solid var(--line); border-radius: 16px; color: var(--txt);
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .field input {
+    width: 100%; padding: 15px 16px; background: #f7fbff;
+    border: 2px solid var(--line); border-radius: 14px; color: var(--txt);
     font-size: 16px; font-family: inherit; font-weight: 700; outline: none;
-    transition: border-color .15s, box-shadow .15s, background .15s; }
-  .field input:focus { border-color: var(--pink); background: #fff;
-    box-shadow: 0 0 0 4px rgba(255, 95, 162, 0.12); }
+    transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  .field input:focus {
+    border-color: var(--pink); background: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 95, 162, 0.12);
+  }
   .field input::placeholder { color: #a8b8d0; }
 
-  .avatar-preview { text-align: center; margin: 12px 0 16px; }
-  .avatar-preview img { width: 110px; height: 110px; border-radius: 50%;
-    border: 4px solid #fff; background: #f7fbff;
-    box-shadow: 0 6px 0 rgba(200, 223, 245, 0.5), 0 12px 24px rgba(120, 160, 200, 0.2); }
-  .avatar-hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fff; border: 2px solid var(--line); border-radius: 16px;
+    padding: 14px 18px; margin-bottom: 10px;
+    box-shadow: 0 4px 0 rgba(200, 223, 245, 0.5);
+  }
+  .row-info { flex: 1; }
+  .row-name { font-weight: 800; font-size: 15px; color: var(--txt); }
+  .row-meta { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 700; }
+  .row-meta code { background: #f0f7ff; padding: 1px 6px; border-radius: 6px; font-size: 11px; color: var(--blue); }
+  .row-count {
+    font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700;
+    color: var(--pink);
+  }
 
-  .progress { background: #fff; border-radius: 999px; height: 14px;
-    margin-bottom: 22px; overflow: hidden; border: 2px solid var(--line);
-    box-shadow: 0 4px 0 rgba(200, 223, 245, 0.5); }
-  .progress-fill { height: 100%; width: 0%;
-    background: linear-gradient(90deg, #ff5fa2, #ff85b8, #5cb8ff, #ff5fa2);
-    background-size: 300% 100%; border-radius: 999px;
-    transition: width .4s ease; animation: slide 4s linear infinite; }
-  @keyframes slide { to { background-position: 300% 0; } }
+  .muted { color: var(--muted); font-size: 13px; text-align: center; padding: 30px 0; font-weight: 700; }
 
-  .qnum { font-size: 12px; font-weight: 800; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.12em; text-align: center; margin-bottom: 8px; }
-  .qemoji { font-size: 68px; text-align: center; display: block; margin: 8px 0 16px; }
-  .qtext { font-family: 'Baloo 2', cursive; font-size: 26px; font-weight: 800; text-align: center;
-    line-height: 1.25; margin-bottom: 26px; min-height: 60px; color: var(--txt); }
+  #authScreen { max-width: 380px; margin: 80px auto; text-align: center; }
+  #authScreen .brand { font-size: 48px; }
+  #authScreen h1 { font-size: 18px; color: var(--muted); margin-bottom: 24px; font-weight: 700; }
 
-  .options { display: grid; gap: 10px; }
-  .option { padding: 18px; border-radius: 16px; background: #f7fbff;
-    border: 2px solid var(--line); font-family: inherit;
-    font-size: 16px; font-weight: 800; color: var(--txt);
-    cursor: pointer; transition: all .15s; text-align: left;
-    box-shadow: 0 3px 0 rgba(200, 223, 245, 0.5); }
-  .option:hover { background: #fff; border-color: var(--blue); transform: translateY(-2px); }
-  .option:active { transform: translateY(0); }
-  .option.correct { background: var(--green-lt); border-color: var(--green); color: #1f7a4a;
-    box-shadow: 0 3px 0 rgba(77, 214, 157, 0.5); animation: pop .3s ease; }
-  .option.wrong { background: #ffe0e0; border-color: var(--red); color: #a82727;
-    box-shadow: 0 3px 0 rgba(255, 107, 107, 0.4); animation: shake .4s ease; }
-  .option.selected { background: var(--pink-lt); border-color: var(--pink);
-    box-shadow: 0 3px 0 rgba(255, 95, 162, 0.4); }
-  .option.selected::before { content: '✓  '; font-weight: 900; color: var(--pink); }
-  @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.04); } 100% { transform: scale(1); } }
-  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  #mainScreen { display: none; }
 
-  .result-card { background: linear-gradient(160deg, #fff, #f7fbff);
-    border: 3px solid var(--line); border-radius: 26px;
-    padding: 34px 24px; text-align: center; margin-bottom: 20px;
-    position: relative; overflow: hidden;
-    box-shadow: 0 8px 0 rgba(200, 223, 245, 0.5), 0 16px 40px rgba(120, 160, 200, 0.2); }
-  .result-inner { position: relative; z-index: 1; }
-  .result-emoji { font-size: 96px; margin-bottom: 8px; display: block;
-    animation: popBig .8s cubic-bezier(.34,1.56,.64,1); }
-  @keyframes popBig { 0% { transform: scale(0) rotate(-30deg); } 100% { transform: scale(1) rotate(0); } }
-  .result-tier { font-family: 'Baloo 2', cursive; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px;
-    color: var(--pink); }
-  .result-score { font-family: 'Caveat', cursive; font-size: 80px; font-weight: 700;
-    line-height: 1; margin: 6px 0; color: var(--blue);
-    animation: countIn .8s ease; }
-  @keyframes countIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .result-label { font-size: 12px; font-weight: 800; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.14em; }
-  .result-desc { color: var(--muted); font-size: 15px; margin-top: 14px; }
+  .header-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px;
+  }
+  .header-row .muted { padding: 0; text-align: left; }
 
-  .viral { background: linear-gradient(135deg, #fff5fa, #f0f8ff);
-    border: 2px solid var(--pink-lt); border-radius: 22px; padding: 24px 22px;
-    margin: 18px 0; text-align: center;
-    box-shadow: 0 6px 0 rgba(255, 208, 228, 0.5); }
-  .viral h3 { font-family: 'Baloo 2', cursive; font-size: 24px; font-weight: 800; margin-bottom: 8px; color: var(--pink); }
-  .viral p { font-size: 14px; color: var(--muted); margin-bottom: 16px; font-weight: 700; }
-  .viral .pulse-emoji { font-size: 56px; margin-bottom: 12px; line-height: 1;
-    display: inline-block; animation: bounce 2s ease-in-out infinite; }
+  .bear-row { display: flex; justify-content: center; gap: 8px; font-size: 42px; margin-bottom: 4px; }
+  .bear-row span { display: inline-block; animation: bounce 2.4s ease-in-out infinite; }
+  .bear-row span:nth-child(1) { transform: rotate(-6deg); }
+  .bear-row span:nth-child(2) { animation-delay: .3s; transform: rotate(6deg); }
+  @keyframes bounce { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-8px) rotate(6deg); } }
 
-  .share-box { background: #f7fbff; border: 2px dashed var(--pink-lt);
-    border-radius: 18px; padding: 16px; margin-bottom: 16px;
-    word-break: break-all; font-size: 13px; color: var(--pink);
-    font-family: ui-monospace, Menlo, monospace; font-weight: 800; text-align: center; }
-  .share-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .wa-btn { background: linear-gradient(135deg, #25d366, #4dd69d); color: #fff;
-    box-shadow: 0 6px 0 #128c4a, 0 10px 24px rgba(37, 211, 102, 0.3); }
-  .wa-btn:active { box-shadow: 0 2px 0 #128c4a; transform: translateY(2px) scale(0.98); }
-
-  .toast { position: fixed; bottom: 24px; left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #fff; color: var(--txt); padding: 14px 22px; border-radius: 16px;
-    font-size: 14px; font-weight: 800; opacity: 0;
-    transition: all .3s ease; pointer-events: none; z-index: 200;
-    border: 2px solid var(--line);
-    box-shadow: 0 8px 0 rgba(200, 223, 245, 0.5), 0 16px 40px rgba(120, 160, 200, 0.25); max-width: 90%; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; display: none; }
-
-  .sound-toggle { position: fixed; top: 16px; right: 16px; z-index: 50;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: #fff; border: 2px solid var(--line);
-    color: var(--txt); font-size: 20px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 0 rgba(200, 223, 245, 0.6); }
-
-  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 30px 0 10px; font-weight: 700; }
-  footer span { color: var(--pink); font-weight: 800; }
-
-  .bear-name { display: inline-block; }
-
-  @media (max-width: 400px) {
-    h1 { font-size: 28px; }
-    .hero-bears { font-size: 78px; }
-    .result-score { font-size: 68px; }
+  .row-actions { display: flex; gap: 6px; margin-left: 10px; }
+  .row-actions button {
+    background: transparent; border: none; font-size: 18px;
+    cursor: pointer; padding: 4px;
   }
 </style>
 </head>
@@ -238,632 +160,214 @@
   <div class="cloud c1">☁️</div>
   <div class="cloud c2">☁️</div>
   <div class="cloud c3">☁️</div>
-  <div class="cloud c4">☁️</div>
 </div>
-<div class="heart h1">💖</div>
-<div class="heart h2">💙</div>
-<div class="heart h3">⭐</div>
-<div class="heart h4">💕</div>
-
-<button class="sound-toggle" id="soundToggle" title="Toggle sound">🔊</button>
 
 <div class="app">
 
-  <div class="view active" id="v-home">
-    <div class="brand">Block<span>Me</span></div>
-    <div class="hero-bears"><span>🐻</span><span>🐼</span></div>
-    <h1 class="center">Will you get <em>blocked</em>?</h1>
-    <p class="sub center">Find friends you shouldn't trust. Take the 1-minute quiz.</p>
-    <button class="btn btn-primary" id="goCreate" style="margin-bottom:10px;">🚫 Start my quiz</button>
-    <div class="chips">
-      <div class="chip pink">🌸 1 min</div>
-      <div class="chip blue">💙 Free</div>
-      <div class="chip yellow">⭐ No login</div>
-    </div>
-  </div>
-
-  <div class="view" id="v-create">
-    <div class="brand">Block<span>Me</span></div>
-    <h2>Set up ✨</h2>
-    <p class="sub">Your name + cute avatar. That's it.</p>
+  <!-- AUTH -->
+  <div id="authScreen">
+    <div class="bear-row"><span>🐻</span><span>🐼</span></div>
+    <div class="brand">Block<span>Me</span> Admin</div>
+    <h1>Enter password 🔒</h1>
     <div class="card">
       <div class="field">
-        <label>Your name</label>
-        <input id="myName" placeholder="e.g. Ananya" maxlength="20" autocomplete="off" />
+        <input id="pwd" type="password" placeholder="••••••••" autocomplete="off" />
       </div>
-      <div class="avatar-preview">
-        <img id="avImg" src="" alt="" />
-      </div>
-      <div class="avatar-hint">Tap below for a new one 👇</div>
-      <button class="btn btn-ghost btn-sm" id="shuffleAv" style="width:100%; margin-top:10px;">🎲 Shuffle avatar</button>
-    </div>
-    <button class="btn btn-primary" id="startQ">Start →</button>
-  </div>
-
-  <div class="view" id="v-setup">
-    <div class="progress"><div class="progress-fill" id="sProg"></div></div>
-    <div class="qnum" id="sNum">Question 1 of 10</div>
-    <div id="sWrap"></div>
-    <button class="btn btn-ghost btn-sm" id="shuffleQ" style="width:100%; margin-bottom:8px;">🎲 Shuffle questions</button>
-    <button class="btn btn-primary" id="sNext">Next →</button>
-  </div>
-
-  <div class="view" id="v-share">
-    <div class="brand">Block<span>Me</span></div>
-    <div class="hero-bears"><span>🎉</span><span>💌</span></div>
-    <h2 class="center">Quiz ready!</h2>
-    <p class="sub center">Send this link. No signup, just tap.</p>
-    <div class="share-box" id="shareLink">…</div>
-    <div class="share-row">
-      <button class="btn wa-btn btn-sm" id="waShare">💬 WhatsApp</button>
-      <button class="btn btn-ghost btn-sm" id="copyLink">📋 Copy</button>
-    </div>
-    <div class="share-row">
-      <button class="btn btn-ghost btn-sm" id="viewMyDash" style="grid-column: 1 / -1;">👀 See who answered</button>
-    </div>
-    <div class="viral" style="margin-top:20px;">
-      <div class="pulse-emoji">💡</div>
-      <h3>Pro tip</h3>
-      <p>Screenshot + Instagram story → 10x responses.</p>
+      <button class="btn" style="width:100%;" id="loginBtn">Unlock 🔓</button>
     </div>
   </div>
 
-  <div class="view" id="v-play">
-    <div class="progress"><div class="progress-fill" id="pProg"></div></div>
-    <div class="qnum" id="pNum">Question 1</div>
-    <div id="pWrap"></div>
-  </div>
+  <!-- MAIN -->
+  <div id="mainScreen">
+    <div class="bear-row"><span>🐻</span><span>🐼</span></div>
+    <div class="brand">Block<span>Me</span> Admin</div>
 
-  <div class="view" id="v-result">
-    <div class="result-card">
-      <div class="result-inner">
-        <span class="result-emoji" id="rEmoji">💖</span>
-        <div class="result-tier" id="rTier">…</div>
-        <div class="result-score" id="rScore">0/10</div>
-        <div class="result-label">Know-me score</div>
-        <div class="result-desc" id="rDesc"></div>
-      </div>
+    <div class="header-row">
+      <span class="muted" id="lastUpdate">—</span>
+      <button class="btn btn-ghost" id="logoutBtn" style="padding:8px 14px;font-size:12px;">Logout</button>
     </div>
 
-    <div class="viral">
-      <div class="pulse-emoji">🐻</div>
-      <h3>Ab tumhara turn!</h3>
-      <p>Apna quiz banao — dekh koi tumhe block karega ya nahi 👀</p>
-      <button class="btn btn-primary" id="makeMine" style="font-size:17px; padding:18px;">
-        🚫 Create my quiz — 1 min
-      </button>
-      <div style="font-size:12px; color:var(--muted); margin-top:12px; font-weight:700;">
-        No login · No email · Just you & your friends
-      </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="sQuizzes">—</div><div class="stat-label">Quizzes</div></div>
+      <div class="stat"><div class="stat-num" id="sResps">—</div><div class="stat-label">Responses</div></div>
+      <div class="stat"><div class="stat-num" id="sAvg">—</div><div class="stat-label">Avg score</div></div>
+      <div class="stat"><div class="stat-num" id="sBlocked">—</div><div class="stat-label">Blocked %</div></div>
     </div>
 
-    <div class="share-row" style="margin-top:14px;">
-      <button class="btn wa-btn btn-sm" id="challenge">🔥 Challenge friends</button>
-      <button class="btn btn-ghost btn-sm" id="again">🔄 Retry</button>
+    <h2>🏆 All quizzes</h2>
+    <div id="quizList"><p class="muted">Loading…</p></div>
+
+    <h2>💌 Recent responses</h2>
+    <div id="respList"><p class="muted">Loading…</p></div>
+
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="btn btn-ghost" id="refreshBtn" style="flex:1;">🔄 Refresh</button>
+      <button class="btn btn-ghost btn-danger" id="clearBtn" style="flex:1;">⚠ Clear all data</button>
     </div>
   </div>
 
-  <div class="view" id="v-dash">
-    <div class="brand">Block<span>Me</span></div>
-    <h2>Who answered 💌</h2>
-    <p class="sub">Your quiz responses.</p>
-    <div id="dashSum"></div>
-    <div id="dashList"></div>
-    <button class="btn btn-ghost btn-sm" id="backShare" style="margin-top:10px; width:100%;">← Back to share</button>
-  </div>
-
-  <footer>Made with <span>💖</span> · BlockMe</footer>
 </div>
-
-<div class="toast" id="toast"></div>
-<canvas class="confetti" id="cf"></canvas>
 
 <script>
 /* ============================================================
-   CONFIG — your Upstash credentials
+   CONFIG — same as index.html
    ============================================================ */
 const CONFIG = {
   UPSTASH_URL: "https://evolved-chimp-224053.upstash.io",
   UPSTASH_TOKEN: "gQAAAAAAA2s1AAIgcDI1MzI1Y2MxMjc4NDI0ZTlhYjQ3ZDRiMzIyOTUzMWRiYg",
-  SITE_URL: location.origin + location.pathname
+  ADMIN_PASSWORD: "1"
 };
-
-const POOL = [
-  { e: "🍜", q: "My comfort food?",             o: ["Pizza", "Maggi", "Biryani", "Momos"] },
-  { e: "✈️", q: "My dream travel destination?", o: ["Paris", "Bali", "Japan", "Dubai"] },
-  { e: "🌙", q: "What time do I sleep?",        o: ["Before 10pm", "10pm–12am", "12am–2am", "After 2am"] },
-  { e: "☕", q: "Coffee or chai?",              o: ["Coffee", "Chai", "Both", "Neither"] },
-  { e: "🎨", q: "My favorite color?",           o: ["Black", "Pink", "Blue", "Green"] },
-  { e: "🐾", q: "Cat or dog person?",           o: ["Cat", "Dog", "Both", "Neither"] },
-  { e: "😅", q: "My worst habit?",              o: ["Phone addiction", "Overthinking", "Late sleep", "Procrastination"] },
-  { e: "💫", q: "What makes me instantly happy?", o: ["Food", "Friends", "Music", "Sleep"] },
-  { e: "🎵", q: "My music vibe?",               o: ["Bollywood", "Pop", "Lo-fi", "Hip-hop"] },
-  { e: "🌅", q: "Morning or night?",            o: ["Morning", "Night", "Both", "Neither"] },
-  { e: "🍕", q: "Pineapple on pizza?",          o: ["Yes!", "Never", "Sometimes", "Never tried"] },
-  { e: "🎬", q: "Movie genre I love?",          o: ["Comedy", "Thriller", "Romance", "Action"] },
-  { e: "📱", q: "My phone battery usually?",    o: ["90%+", "50–90%", "20–50%", "Below 20%"] },
-  { e: "🚗", q: "Beach or mountains?",          o: ["Beach", "Mountains", "Both", "Neither"] },
-  { e: "🥤", q: "My go-to drink?",              o: ["Cold coffee", "Coke", "Juice", "Water"] },
-  { e: "📚", q: "Books or movies?",             o: ["Books", "Movies", "Both", "Neither"] },
-  { e: "🎧", q: "I listen to music when…",      o: ["Studying", "Sleeping", "Traveling", "All day"] },
-  { e: "🛍️", q: "Online or offline shopping?",  o: ["Online", "Offline", "Both", "Neither"] },
-  { e: "😴", q: "How many alarms do I set?",    o: ["1", "2–3", "4–5", "None"] },
-  { e: "🍔", q: "My comfort junk food?",        o: ["Burger", "Fries", "Samosa", "Chocolate"] },
-  { e: "🌧️", q: "Rainy day activity?",          o: ["Sleep", "Movies", "Chai + pakora", "Read"] },
-  { e: "🥳", q: "Party or quiet night?",        o: ["Party", "Quiet night", "Both", "Neither"] },
-  { e: "🎮", q: "My gaming vibe?",              o: ["BGMI", "Free Fire", "Minecraft", "No gaming"] },
-  { e: "🎂", q: "Favorite dessert?",            o: ["Ice cream", "Cake", "Gulab jamun", "Brownie"] },
-  { e: "🕐", q: "I reach places…",              o: ["Early", "On time", "10 min late", "Very late"] },
-  { e: "💬", q: "Introvert or extrovert?",      o: ["Introvert", "Extrovert", "Ambivert", "Depends"] },
-  { e: "📸", q: "Selfie person?",               o: ["Yes, always", "Sometimes", "Never", "Only with friends"] },
-  { e: "🥶", q: "Winter or summer?",            o: ["Winter", "Summer", "Monsoon", "Spring"] },
-  { e: "💤", q: "Do I snore?",                  o: ["Yes", "No", "Maybe", "Wake up to find out"] },
-  { e: "🌮", q: "Sweet or spicy?",              o: ["Sweet", "Spicy", "Both", "Neither"] },
-  { e: "📺", q: "Netflix or YouTube?",          o: ["Netflix", "YouTube", "Both", "Neither"] },
-  { e: "🎁", q: "Gift I'd love most?",          o: ["Food", "Clothes", "Money", "Surprise"] },
-  { e: "👀", q: "Stay up late or sleep early?", o: ["Stay up", "Sleep early", "Try both, fail", "Depends"] },
-  { e: "🌞", q: "Perfect Sunday?",              o: ["Sleep all day", "Out with friends", "Family time", "Movies + snacks"] },
-  { e: "🧠", q: "Math or science?",             o: ["Math", "Science", "Both", "Neither"] },
-  { e: "😋", q: "Sweet tooth?",                 o: ["Full", "Sometimes", "Rarely", "Never"] },
-  { e: "🥲", q: "Cry at movies?",               o: ["Every time", "Sometimes", "Never", "Only animated"] },
-  { e: "📝", q: "My text style?",               o: ["Full sentences", "Short words", "Emojis only", "Voice notes"] },
-  { e: "🚶", q: "Gym person?",                  o: ["Daily", "Sometimes", "Never", "Thinking about it"] },
-  { e: "🌊", q: "My stress buster?",            o: ["Music", "Walk", "Food", "Sleep"] },
-  { e: "🎈", q: "Scared of heights?",           o: ["Yes", "No", "Maybe", "Depends"] },
-  { e: "🍫", q: "Chocolate brand?",             o: ["Dairy Milk", "KitKat", "5 Star", "Don't care"] },
-  { e: "🕹️", q: "PC or mobile?",                o: ["PC", "Mobile", "Console", "None"] },
-  { e: "🎨", q: "Do I text first?",             o: ["Text first", "Wait", "Depends", "Never text"] },
-  { e: "🌺", q: "My favorite season?",          o: ["Summer", "Winter", "Monsoon", "Spring"] },
-  { e: "🎪", q: "Best mood lifter?",            o: ["Music", "Food", "Friends", "Sleep"] },
-  { e: "📖", q: "Am I a night owl?",            o: ["Yes", "No", "Sometimes", "Always tired"] },
-  { e: "🌸", q: "My spirit animal?",            o: ["Cat", "Dog", "Panda", "Wolf"] }
-];
-
-const TIERS = [
-  { min: .95, e: "💖", t: "Total Bestie",     d: "You'd never get blocked. Certified real one." },
-  { min: .75, e: "✨", t: "Safe Zone",         d: "You're on the good list. Keep it up." },
-  { min: .55, e: "🌸", t: "Almost Safe",       d: "A few red flags. Nothing fatal." },
-  { min: .35, e: "🍃", t: "On Thin Ice",       d: "Watch your step. One wrong move..." },
-  { min: .15, e: "😅", t: "About to be Blocked",d: "Bestie — you're on the edge. Fix it." },
-  { min: 0,   e: "🚫", t: "BLOCKED",            d: "It's over. You've been blocked. Bye." }
-];
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shuffle = a => { const r = [...a]; for (let i = r.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; } return r; };
-const avatar = s => `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(s)}&backgroundColor=ffd5dc,ffdfbf,c0aede,d1d4f9,b6e3f4`;
-
-function toast(m) {
-  const t = $("toast");
-  t.textContent = m; t.classList.add("show");
-  clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove("show"), 2000);
-}
-function show(v) {
-  document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
-  $("v-" + v).classList.add("active");
-  window.scrollTo(0, 0);
-}
-function shortId() {
-  const c = "abcdefghjkmnpqrstuvwxyz23456789";
-  let s = "";
-  for (let i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)];
-  return s;
-}
-
-const Sound = (() => {
-  let ctx;
-  let enabled = localStorage.getItem("bm.sound") !== "0";
-  function init() {
-    if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch {} }
-    if (ctx && ctx.state === "suspended") ctx.resume();
-  }
-  function tone(freq, dur, type = "sine", vol = 0.15, delay = 0) {
-    if (!enabled || !ctx) return;
-    const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = type; o.frequency.value = freq;
-    o.connect(g); g.connect(ctx.destination);
-    const t = ctx.currentTime + delay;
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(vol, t + 0.008);
-    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    o.start(t); o.stop(t + dur + 0.02);
-  }
-  return {
-    init,
-    tap: () => { init(); tone(720, 0.05, "sine", 0.06); },
-    correct: () => { init(); tone(523, 0.14, "sine", 0.12); tone(784, 0.22, "sine", 0.12, 0.09); },
-    wrong: () => { init(); tone(180, 0.18, "triangle", 0.08); tone(140, 0.22, "triangle", 0.06, 0.1); },
-    result: () => { init(); tone(523, 0.2, "sine", 0.11); tone(659, 0.2, "sine", 0.11, 0.14); tone(880, 0.34, "sine", 0.13, 0.28); },
-    toggle: () => {
-      enabled = !enabled;
-      localStorage.setItem("bm.sound", enabled ? "1" : "0");
-      $("soundToggle").textContent = enabled ? "🔊" : "🔇";
-      return enabled;
-    },
-    isOn: () => enabled
-  };
-})();
 
 async function redis(...cmd) {
   const res = await fetch(CONFIG.UPSTASH_URL, {
     method: "POST",
-    headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
+    headers: {
+      "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`,
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(cmd)
   });
   const data = await res.json();
   if (data.error) throw new Error(data.error);
   return data.result;
 }
-async function pipe(cmds) {
-  const res = await fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
-    body: JSON.stringify(cmds)
-  });
-  return res.json();
-}
-async function saveQuiz(quiz) {
-  await pipe([
-    ["SET", `quiz:${quiz.id}`, JSON.stringify(quiz)],
-    ["SADD", "quizzes:all", quiz.id],
-    ["INCR", "stats:quizzes"]
-  ]);
-}
-async function getQuiz(id) {
-  const raw = await redis("GET", `quiz:${id}`);
-  if (!raw) return null;
-  try { return JSON.parse(raw); } catch { return null; }
-}
-async function saveResponse(quizId, resp) {
-  await pipe([
-    ["RPUSH", `resp:${quizId}`, JSON.stringify(resp)],
-    ["INCR", "stats:responses"]
-  ]);
-}
-async function getResponses(quizId) {
-  const raws = await redis("LRANGE", `resp:${quizId}`, 0, -1);
-  if (!Array.isArray(raws)) return [];
-  return raws.map(r => { try { return JSON.parse(r); } catch { return null; } }).filter(Boolean);
-}
 
-const state = {
-  name: "", seed: "", questions: [], idx: 0, quizId: null,
-  playQuiz: null, playIdx: 0, playScore: 0, shuffledOpts: [], playerName: ""
-};
-
-function boot() {
-  const h = location.hash;
-  let m;
-  if ((m = h.match(/^#\/play\/([a-z0-9]+)$/i))) { openPlay(m[1]); return; }
-  if ((m = h.match(/^#\/dash\/([a-z0-9]+)$/i))) { openDash(m[1]); return; }
-  if (h === "#/create") { startCreate(); return; }
-  // also support ?id=xxx for worker redirect
-  const urlId = new URLSearchParams(location.search).get("id");
-  if (urlId) { openPlay(urlId); return; }
-  show("home");
+function checkAuth() {
+  const ok = sessionStorage.getItem("bm.admin") === "1";
+  $("authScreen").style.display = ok ? "none" : "block";
+  $("mainScreen").style.display = ok ? "block" : "none";
+  if (ok) loadData();
 }
-window.addEventListener("hashchange", boot);
-
-function startCreate() {
-  state.seed = "s" + Date.now();
-  $("avImg").src = avatar(state.seed);
-  show("create");
-}
-$("goCreate").onclick = () => { Sound.tap(); startCreate(); };
-$("shuffleAv").onclick = () => { Sound.tap(); state.seed = "s" + Date.now(); $("avImg").src = avatar(state.seed); };
-
-$("startQ").onclick = () => {
-  const n = $("myName").value.trim();
-  if (!n || n.length < 2) { toast("Enter your name"); return; }
-  Sound.tap();
-  state.name = n;
-  state.questions = pick(10);
-  state.idx = 0;
-  show("setup");
-  renderSetup();
-};
-
-function pick(n) {
-  return shuffle(POOL).slice(0, n).map(q => ({ e: q.e, q: q.q, o: [...q.o], c: null }));
-}
-
-$("shuffleQ").onclick = () => {
-  Sound.tap();
-  const anyAns = state.questions.some(x => x.c);
-  if (anyAns && !confirm("Reset all answers?")) return;
-  state.questions = pick(10);
-  state.idx = 0;
-  renderSetup();
-  toast("New questions 🎲");
-};
-
-function renderSetup() {
-  const i = state.idx;
-  const q = state.questions[i];
-  $("sNum").textContent = `Question ${i+1} of ${state.questions.length}`;
-  $("sProg").style.width = (i / state.questions.length * 100) + "%";
-  $("sWrap").innerHTML = `
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <div style="font-size:28px;">${q.e}</div>
-        <div style="flex:1;font-family:'Baloo 2',cursive;font-weight:800;font-size:17px;">${esc(q.q)}</div>
-        <div style="background:linear-gradient(135deg,#ff5fa2,#ff85b8);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;">${i+1}/${state.questions.length}</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="sOpts">
-        ${q.o.map((opt, idx) => `
-          <button class="option ${q.c === opt ? 'selected' : ''}" data-idx="${idx}" style="padding:12px 14px;font-size:14px;">${esc(opt)}</button>
-        `).join("")}
-      </div>
-    </div>
-  `;
-  document.querySelectorAll("#sOpts .option").forEach(b => {
-    b.onclick = () => {
-      Sound.tap();
-      document.querySelectorAll("#sOpts .option").forEach(x => x.classList.remove("selected"));
-      b.classList.add("selected");
-      state.questions[i].c = q.o[parseInt(b.dataset.idx)];
-      $("sNext").disabled = false;
-    };
-  });
-  $("sNext").disabled = !q.c;
-  $("sNext").textContent = (i === state.questions.length - 1) ? "Finish 💖" : "Next →";
-}
-
-$("sNext").onclick = async () => {
-  if (!state.questions[state.idx].c) return;
-  Sound.tap();
-  if (state.idx < state.questions.length - 1) {
-    state.idx++;
-    renderSetup();
+$("loginBtn").onclick = () => {
+  if ($("pwd").value === CONFIG.ADMIN_PASSWORD) {
+    sessionStorage.setItem("bm.admin", "1");
+    checkAuth();
   } else {
-    await finishCreate();
+    alert("Wrong password");
   }
 };
+$("pwd").addEventListener("keydown", e => { if (e.key === "Enter") $("loginBtn").click(); });
+$("logoutBtn").onclick = () => { sessionStorage.removeItem("bm.admin"); checkAuth(); };
 
-async function finishCreate() {
-  $("sNext").innerHTML = '<span style="opacity:.6">Creating…</span>';
-  const id = shortId();
-  const quiz = {
-    id, creator: state.name, avatar_seed: state.seed,
-    questions: state.questions, created_at: Date.now()
-  };
+async function loadData() {
+  $("quizList").innerHTML = '<p class="muted">Loading…</p>';
+  $("respList").innerHTML = '<p class="muted">Loading…</p>';
+
+  let quizIds = [], quizzes = [], allResps = [];
+
   try {
-    await saveQuiz(quiz);
-    state.quizId = id;
-    $("shareLink").textContent = `${CONFIG.SITE_URL}#/play/${id}`;
-    show("share");
-    Sound.result();
+    quizIds = await redis("SMEMBERS", "quizzes:all") || [];
+    const quizCommands = quizIds.map(id => ["GET", `quiz:${id}`]);
+    const respCommands = quizIds.map(id => ["LRANGE", `resp:${id}`, 0, -1]);
+    const [qRes, rRes] = await Promise.all([
+      fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify(quizCommands)
+      }).then(r => r.json()),
+      fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify(respCommands)
+      }).then(r => r.json())
+    ]);
+    quizzes = (qRes || []).map(x => { try { return JSON.parse(x.result); } catch { return null; } }).filter(Boolean);
+    const respArrays = (rRes || []).map(x => Array.isArray(x.result) ? x.result : []);
+    allResps = [];
+    quizzes.forEach((q, i) => {
+      respArrays[i].forEach(raw => {
+        try {
+          const r = JSON.parse(raw);
+          allResps.push({ ...r, quiz_id: q.id, quiz_creator: q.creator });
+        } catch {}
+      });
+    });
   } catch (e) {
     console.error(e);
-    toast("Save failed. Try again.");
-  }
-  $("sNext").textContent = "Finish 💖";
-}
-
-$("waShare").onclick = () => {
-  Sound.tap();
-  const link = $("shareLink").textContent;
-  const name = state.name || "Someone";
-  const msg = `${name} is blocking 🚫 fake friends.\n\nwill he block you as well?\n\nlet's see 👇\n${link}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
-};
-$("copyLink").onclick = async () => {
-  Sound.tap();
-  try {
-    await navigator.clipboard.writeText($("shareLink").textContent);
-    toast("Link copied 💫");
-  } catch { toast("Long-press to copy"); }
-};
-$("viewMyDash").onclick = () => {
-  Sound.tap();
-  if (!state.quizId) return;
-  location.hash = `#/dash/${state.quizId}`;
-};
-
-async function openPlay(id) {
-  show("play");
-  $("pWrap").innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px 0;">Loading quiz…</p>';
-  let quiz;
-  try { quiz = await getQuiz(id); } catch (e) { quiz = null; }
-  if (!quiz || !quiz.questions?.length) {
-    $("pWrap").innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px 0;">Quiz not found 💔</p>';
+    $("quizList").innerHTML = '<p class="muted">Failed to load. Check Upstash config.</p>';
     return;
   }
-  state.playQuiz = quiz;
-  state.playIdx = 0;
-  state.playScore = 0;
-  state.shuffledOpts = quiz.questions.map(x => shuffle(x.o));
-  renderPlayIntro();
-}
 
-function renderPlayIntro() {
-  const d = state.playQuiz;
-  $("pNum").textContent = `${esc(d.creator)}'s quiz`;
-  $("pProg").style.width = "0%";
-  $("pWrap").innerHTML = `
-    <div style="text-align:center;padding:20px 0 12px;">
-      <div style="font-size:80px;line-height:1;">🐻</div>
-      <div style="font-size:80px;line-height:1;margin-top:-30px;">🐼</div>
-      <div style="font-family:'Baloo 2',cursive;font-size:32px;margin-top:14px;color:var(--pink);font-weight:800;">
-        ${esc(d.creator)}'s quiz
-      </div>
-      <div style="color:var(--muted);font-size:15px;margin-top:6px;">${d.questions.length} questions. Guess their answers.</div>
-    </div>
-    <div class="card" style="margin-top:20px;">
-      <div class="field" style="margin-bottom:0;">
-        <label>Your name</label>
-        <input id="pName" placeholder="e.g. Riya" maxlength="20" autocomplete="off" />
-      </div>
-    </div>
-    <button class="btn btn-primary" id="pStart" style="margin-top:6px;">Start quiz →</button>
-  `;
-  $("pStart").onclick = () => {
-    const n = $("pName").value.trim();
-    if (!n || n.length < 2) { toast("Enter your name"); return; }
-    Sound.tap();
-    state.playerName = n;
-    renderPlayQ();
-  };
-}
+  $("sQuizzes").textContent = quizzes.length;
+  $("sResps").textContent = allResps.length;
+  const avg = allResps.length ? (allResps.reduce((s, r) => s + (r.score || 0), 0) / allResps.length).toFixed(1) : "—";
+  $("sAvg").textContent = avg;
 
-function renderPlayQ() {
-  const i = state.playIdx;
-  const q = state.playQuiz.questions[i];
-  const opts = state.shuffledOpts[i];
-  const total = state.playQuiz.questions.length;
-  $("pNum").textContent = `Question ${i+1} of ${total}`;
-  $("pProg").style.width = (i / total * 100) + "%";
-  $("pWrap").innerHTML = `
-    <div class="qemoji">${q.e}</div>
-    <div class="qtext">${esc(q.q)}</div>
-    <div class="options" id="pOpts">
-      ${opts.map((opt, idx) => `<button class="option" data-idx="${idx}">${esc(opt)}</button>`).join("")}
-    </div>
-  `;
-  document.querySelectorAll("#pOpts .option").forEach(b => {
-    b.onclick = () => {
-      const chosen = opts[parseInt(b.dataset.idx)];
-      const correct = q.c;
-      const right = chosen === correct;
-      document.querySelectorAll("#pOpts .option").forEach(x => {
-        x.style.pointerEvents = "none";
-        if (x.textContent === correct) x.classList.add("correct");
-        else if (x === b) x.classList.add("wrong");
-      });
-      if (right) { state.playScore++; Sound.correct(); }
-      else Sound.wrong();
-      setTimeout(() => {
-        state.playIdx++;
-        if (state.playIdx < total) renderPlayQ();
-        else finishPlay();
-      }, 900);
-    };
-  });
-}
-
-async function finishPlay() {
-  $("pProg").style.width = "100%";
-  const total = state.playQuiz.questions.length;
-  const score = state.playScore;
-  const pct = score / total;
-  const tier = TIERS.find(t => pct >= t.min);
-  $("rEmoji").textContent = tier.e;
-  $("rTier").textContent = tier.t;
-  $("rScore").textContent = `${score}/${total}`;
-  $("rDesc").textContent = tier.d;
-  show("result");
-  setTimeout(() => Sound.result(), 150);
-  if (pct >= 0.7) { setTimeout(() => confetti(), 400); }
-  try {
-    await saveResponse(state.playQuiz.id, {
-      guesser: state.playerName, score, total, at: Date.now()
-    });
-  } catch (e) { console.error(e); }
-}
-
-$("makeMine").onclick = () => {
-  Sound.tap();
-  location.hash = "";
-  setTimeout(() => startCreate(), 50);
-};
-$("challenge").onclick = () => {
-  Sound.tap();
-  const total = state.playQuiz.questions.length;
-  const pct = state.playScore / total;
-  const tier = TIERS.find(t => pct >= t.min);
-  const link = location.href;
-  const msg = `🔥 I got "${tier.t}" ${tier.e} on ${state.playQuiz.creator}'s quiz (${state.playScore}/${total}).\n\nTu try kar — dekh koi tujhe block karega ya nahi 👇\n${link}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
-};
-$("again").onclick = () => {
-  Sound.tap();
-  state.playIdx = 0; state.playScore = 0;
-  state.shuffledOpts = state.playQuiz.questions.map(x => shuffle(x.o));
-  renderPlayIntro();
-  show("play");
-};
-
-async function openDash(id) {
-  show("dash");
-  $("dashSum").innerHTML = "";
-  $("dashList").innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Loading…</p>';
-  let rs = [], quiz = null;
-  try {
-    rs = await getResponses(id);
-    quiz = await getQuiz(id);
-  } catch (e) {}
-  const total = quiz?.questions?.length || 10;
-  if (!rs.length) {
-    $("dashList").innerHTML = `
-      <div style="text-align:center;padding:40px 20px;color:var(--muted);">
-        <div style="font-size:48px;margin-bottom:10px;">💌</div>
-        No responses yet.<br>Share your link on Instagram story!
-      </div>`;
-    return;
+  // "blocked %" = kitne % players ne 3 se kam score kiya (blocked zone)
+  if (allResps.length) {
+    const blocked = allResps.filter(r => (r.score / (r.total || 10)) < 0.35).length;
+    const pct = Math.round(blocked / allResps.length * 100);
+    $("sBlocked").textContent = pct + "%";
+  } else {
+    $("sBlocked").textContent = "—";
   }
-  const avg = (rs.reduce((s, r) => s + r.score, 0) / rs.length).toFixed(1);
-  $("dashSum").innerHTML = `
-    <div class="card" style="text-align:center;">
-      <div style="font-family:'Caveat',cursive;font-size:68px;line-height:1;color:var(--pink);">${rs.length}</div>
-      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Total responses</div>
-      <div style="margin-top:8px;font-weight:700;color:var(--muted);">Average: <span style="color:var(--pink);">${avg}/${total}</span></div>
-    </div>
-  `;
-  $("dashList").innerHTML = rs.reverse().map((r, i) => {
-    const t = TIERS.find(x => (r.score / (r.total || total)) >= x.min) || TIERS[TIERS.length - 1];
-    return `
-      <div style="display:flex;justify-content:space-between;align-items:center;background:#fff;border:2px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px;box-shadow:0 4px 0 rgba(200,223,245,0.5);">
-        <img src="${avatar(r.guesser || 'anon' + i)}" style="width:44px;height:44px;border-radius:50%;background:#f7fbff;border:2px solid var(--line);" />
-        <div style="flex:1;margin-left:12px;">
-          <div style="font-weight:800;font-size:15px;color:var(--txt);">${esc(r.guesser || "Anonymous")}</div>
-          <div style="font-size:12px;color:var(--muted);font-weight:700;">${new Date(r.at || Date.now()).toLocaleString()}</div>
+
+  $("lastUpdate").textContent = "Updated " + new Date().toLocaleTimeString();
+
+  const counts = {};
+  allResps.forEach(r => counts[r.quiz_id] = (counts[r.quiz_id] || 0) + 1);
+
+  if (!quizzes.length) {
+    $("quizList").innerHTML = '<p class="muted">No quizzes yet. Share the site 🐻</p>';
+  } else {
+    $("quizList").innerHTML = quizzes
+      .sort((a, b) => (counts[b.id] || 0) - (counts[a.id] || 0))
+      .map(q => `
+        <div class="row">
+          <div class="row-info">
+            <div class="row-name">🐻 ${esc(q.creator)}</div>
+            <div class="row-meta">${q.questions?.length || 0} questions · <code>${esc(q.id)}</code> · ${new Date(q.created_at || Date.now()).toLocaleString()}</div>
+          </div>
+          <div class="row-count">${counts[q.id] || 0}</div>
         </div>
-        <div style="text-align:right;">
-          <div style="font-size:22px;">${t.e}</div>
-          <div style="font-weight:800;font-size:16px;color:var(--pink);">${r.score}/${r.total || total}</div>
-        </div>
-      </div>
-    `;
-  }).join("");
+      `).join("");
+  }
+
+  if (!allResps.length) {
+    $("respList").innerHTML = '<p class="muted">No responses yet.</p>';
+  } else {
+    $("respList").innerHTML = allResps
+      .sort((a, b) => (b.at || 0) - (a.at || 0))
+      .slice(0, 30)
+      .map(r => {
+        const total = r.total || 10;
+        const pct = (r.score || 0) / total;
+        const emoji = pct >= 0.95 ? "💖" : pct >= 0.75 ? "✨" : pct >= 0.55 ? "🌸" : pct >= 0.35 ? "🍃" : pct >= 0.15 ? "😅" : "🚫";
+        return `
+          <div class="row">
+            <div class="row-info">
+              <div class="row-name">${emoji} ${esc(r.guesser || "Anonymous")} <span style="color:var(--muted);font-weight:600;font-size:13px;">on ${esc(r.quiz_creator || "?")}'s quiz</span></div>
+              <div class="row-meta">${new Date(r.at || Date.now()).toLocaleString()}</div>
+            </div>
+            <div class="row-count">${r.score}/${total}</div>
+          </div>
+        `;
+      }).join("");
+  }
 }
-$("backShare").onclick = () => {
-  Sound.tap();
-  if (state.quizId) { location.hash = ""; show("share"); }
-  else location.hash = "";
+
+$("refreshBtn").onclick = loadData;
+$("clearBtn").onclick = async () => {
+  if (!confirm("Delete ALL quizzes and responses? This cannot be undone.")) return;
+  if (!confirm("Are you REALLY sure?")) return;
+  try {
+    const ids = await redis("SMEMBERS", "quizzes:all") || [];
+    for (const id of ids) {
+      await redis("DEL", `quiz:${id}`);
+      await redis("DEL", `resp:${id}`);
+    }
+    await redis("DEL", "quizzes:all");
+    await redis("DEL", "stats:quizzes");
+    await redis("DEL", "stats:responses");
+    alert("All cleared. 🐻");
+    loadData();
+  } catch (e) { alert("Failed: " + e.message); }
 };
 
-function confetti() {
-  const c = $("cf");
-  c.style.display = "block";
-  c.width = innerWidth; c.height = innerHeight;
-  const ctx = c.getContext("2d");
-  const parts = Array.from({ length: 100 }, () => ({
-    x: Math.random()*c.width, y: -20,
-    r: Math.random()*6+3, d: Math.random()*3+2,
-    col: ["#ff5fa2","#5cb8ff","#ffce5c","#4dd69d","#ff85b8"][Math.floor(Math.random()*5)],
-    rot: Math.random()*Math.PI, vr: (Math.random()-.5)*.25
-  }));
-  let f = 0;
-  (function tick() {
-    ctx.clearRect(0,0,c.width,c.height);
-    parts.forEach(p => {
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-      ctx.fillStyle = p.col;
-      ctx.beginPath();
-      if (Math.random()>.5) ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);
-      else { ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); }
-      ctx.restore();
-      p.y += p.d; p.rot += p.vr;
-    });
-    if (++f < 200) requestAnimationFrame(tick);
-    else c.style.display = "none";
-  })();
-}
-
-$("soundToggle").textContent = Sound.isOn() ? "🔊" : "🔇";
-$("soundToggle").onclick = () => { Sound.toggle(); Sound.tap(); };
-boot();
+checkAuth();
 </script>
 </body>
 </html>
