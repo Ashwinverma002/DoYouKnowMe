@@ -9,7 +9,6 @@
 <meta property="og:title" content="💌 How well do you really know me?" />
 <meta property="og:description" content="Take my 1-minute quiz 👇" />
 <meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -27,48 +26,38 @@
       radial-gradient(circle at 15% 8%, rgba(168,85,247,0.28), transparent 45%),
       radial-gradient(circle at 88% 15%, rgba(255,61,154,0.22), transparent 45%),
       radial-gradient(circle at 50% 95%, rgba(0,229,196,0.15), transparent 50%);
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
+    background-attachment: fixed; -webkit-font-smoothing: antialiased;
   }
   .app { max-width: 520px; margin: 0 auto; padding: 20px 16px 40px; position: relative; z-index: 1; }
   .view { display: none; animation: fade .4s ease; }
   .view.active { display: block; }
   @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-  .brand {
-    text-align: center; font-family: 'Caveat', cursive;
-    font-size: 34px; font-weight: 700; margin-bottom: 16px;
+  .brand { text-align: center; font-family: 'Caveat', cursive; font-size: 34px; font-weight: 700; margin-bottom: 16px;
     background: linear-gradient(135deg, #ff3d9a, #a855f7, #00e5c4);
-    background-size: 200% 200%; -webkit-background-clip: text;
-    background-clip: text; color: transparent;
-    animation: hue 6s ease infinite;
-  }
+    background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: hue 6s ease infinite; }
   @keyframes hue { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-  h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 12px; text-shadow: 0 2px 20px rgba(168,85,247,0.3); }
+  h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 12px;
+    text-shadow: 0 2px 20px rgba(168,85,247,0.3); }
   h1 em { font-style: normal; background: linear-gradient(135deg, #ff3d9a, #a855f7);
     -webkit-background-clip: text; background-clip: text; color: transparent; }
   h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
   .sub { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
   .center { text-align: center; }
 
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 16px 24px; border-radius: 18px; font-family: inherit;
     font-size: 16px; font-weight: 800; border: none; cursor: pointer;
     width: 100%; transition: transform .12s, box-shadow .25s;
-    text-decoration: none; color: #fff;
-  }
+    text-decoration: none; color: #fff; }
   .btn:active { transform: scale(0.96); }
   .btn:disabled { opacity: .45; pointer-events: none; }
-  .btn-primary {
-    background: linear-gradient(135deg, #ff3d9a, #a855f7);
-    box-shadow: 0 8px 24px rgba(255,61,154,0.35), 0 0 40px rgba(168,85,247,0.25);
-  }
-  .btn-ghost {
-    background: var(--glass); border: 1.5px solid var(--line);
-    color: var(--txt); backdrop-filter: blur(12px);
-  }
+  .btn-primary { background: linear-gradient(135deg, #ff3d9a, #a855f7);
+    box-shadow: 0 8px 24px rgba(255,61,154,0.35), 0 0 40px rgba(168,85,247,0.25); }
+  .btn-ghost { background: var(--glass); border: 1.5px solid var(--line);
+    color: var(--txt); backdrop-filter: blur(12px); }
   .btn-sm { padding: 12px 16px; font-size: 14px; border-radius: 14px; }
 
   .hero { font-size: 88px; text-align: center; margin: 4px 0 14px; line-height: 1; }
@@ -79,64 +68,43 @@
   @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
   .chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 18px 0; }
-  .chip {
-    padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
-    background: var(--glass); border: 1.5px solid var(--line);
-    backdrop-filter: blur(10px);
-  }
+  .chip { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    background: var(--glass); border: 1.5px solid var(--line); backdrop-filter: blur(10px); }
   .chip.pink { color: #ff87be; border-color: rgba(255,61,154,0.4); }
   .chip.purple { color: #c9a4ff; }
   .chip.mint { color: #5dffd9; border-color: rgba(0,229,196,0.4); }
 
-  .card {
-    background: var(--glass); border-radius: 22px; padding: 20px;
+  .card { background: var(--glass); border-radius: 22px; padding: 20px;
     margin-bottom: 14px; border: 1.5px solid var(--line);
-    backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    position: relative;
-  }
+    backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
 
   .field { margin-bottom: 16px; }
-  .field label {
-    display: block; font-size: 12px; font-weight: 800; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
-  }
-  .field input {
-    width: 100%; padding: 16px 18px; background: rgba(15,8,32,0.6);
-    border: 1.5px solid var(--line); border-radius: 16px;
-    color: var(--txt); font-size: 16px; font-family: inherit; font-weight: 700;
-    outline: none; transition: border-color .15s, box-shadow .15s;
-  }
-  .field input:focus {
-    border-color: var(--pink);
-    box-shadow: 0 0 0 4px rgba(255,61,154,0.15), 0 0 24px rgba(255,61,154,0.25);
-  }
+  .field label { display: block; font-size: 12px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .field input { width: 100%; padding: 16px 18px; background: rgba(15,8,32,0.6);
+    border: 1.5px solid var(--line); border-radius: 16px; color: var(--txt);
+    font-size: 16px; font-family: inherit; font-weight: 700; outline: none;
+    transition: border-color .15s, box-shadow .15s; }
+  .field input:focus { border-color: var(--pink);
+    box-shadow: 0 0 0 4px rgba(255,61,154,0.15), 0 0 24px rgba(255,61,154,0.25); }
   .field input::placeholder { color: #6a5680; font-weight: 600; }
 
   .avatar-preview { text-align: center; margin: 12px 0 16px; }
-  .avatar-preview img {
-    width: 110px; height: 110px; border-radius: 50%;
+  .avatar-preview img { width: 110px; height: 110px; border-radius: 50%;
     border: 3px solid rgba(255,61,154,0.5); background: #1c1038;
     box-shadow: 0 0 30px rgba(255,61,154,0.4), 0 0 60px rgba(168,85,247,0.25);
-    animation: pulse 3s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 30px rgba(255,61,154,0.4), 0 0 60px rgba(168,85,247,0.25); }
-    50% { box-shadow: 0 0 42px rgba(255,61,154,0.6), 0 0 80px rgba(168,85,247,0.4); }
-  }
+    animation: pulse 3s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 30px rgba(255,61,154,0.4), 0 0 60px rgba(168,85,247,0.25); }
+    50% { box-shadow: 0 0 42px rgba(255,61,154,0.6), 0 0 80px rgba(168,85,247,0.4); } }
   .avatar-hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
-  .progress {
-    background: rgba(15,8,32,0.7); border-radius: 999px; height: 12px;
-    margin-bottom: 22px; overflow: hidden;
-    border: 1.5px solid var(--line);
-  }
-  .progress-fill {
-    height: 100%; width: 0%;
+  .progress { background: rgba(15,8,32,0.7); border-radius: 999px; height: 12px;
+    margin-bottom: 22px; overflow: hidden; border: 1.5px solid var(--line); }
+  .progress-fill { height: 100%; width: 0%;
     background: linear-gradient(90deg, #ff3d9a, #a855f7, #00e5c4, #ff3d9a);
     background-size: 300% 100%; border-radius: 999px;
     transition: width .4s ease; animation: slide 4s linear infinite;
-    box-shadow: 0 0 20px rgba(255,61,154,0.6);
-  }
+    box-shadow: 0 0 20px rgba(255,61,154,0.6); }
   @keyframes slide { to { background-position: 300% 0; } }
 
   .qnum { font-size: 12px; font-weight: 800; color: var(--muted);
@@ -148,104 +116,84 @@
     text-shadow: 0 0 24px rgba(168,85,247,0.35); }
 
   .options { display: grid; gap: 10px; }
-  .option {
-    padding: 18px; border-radius: 16px; background: var(--glass);
+  .option { padding: 18px; border-radius: 16px; background: var(--glass);
     border: 1.5px solid var(--line); font-family: inherit;
     font-size: 16px; font-weight: 700; color: var(--txt);
     cursor: pointer; transition: all .18s; text-align: left;
-    backdrop-filter: blur(12px); box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-  }
-  .option:hover { border-color: var(--pink); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,61,154,0.3); }
-  .option.correct {
-    background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(0,229,196,0.15));
-    border-color: #4ade80; color: #d4ffe1;
-    box-shadow: 0 0 24px rgba(74,222,128,0.4);
-  }
-  .option.wrong {
-    background: linear-gradient(135deg, rgba(255,91,127,0.2), rgba(255,61,154,0.15));
-    border-color: #ff5b7f; color: #ffd4dd;
-  }
-  .option.selected {
-    background: linear-gradient(135deg, rgba(255,61,154,0.22), rgba(168,85,247,0.22));
-    border-color: var(--pink); box-shadow: 0 0 24px rgba(255,61,154,0.35);
-  }
+    backdrop-filter: blur(12px); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+  .option:hover { border-color: var(--pink); transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,61,154,0.3); }
+  .option.correct { background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(0,229,196,0.15));
+    border-color: #4ade80; color: #d4ffe1; box-shadow: 0 0 24px rgba(74,222,128,0.4); }
+  .option.wrong { background: linear-gradient(135deg, rgba(255,91,127,0.2), rgba(255,61,154,0.15));
+    border-color: #ff5b7f; color: #ffd4dd; }
+  .option.selected { background: linear-gradient(135deg, rgba(255,61,154,0.22), rgba(168,85,247,0.22));
+    border-color: var(--pink); box-shadow: 0 0 24px rgba(255,61,154,0.35); }
   .option.selected::before { content: '✓  '; font-weight: 900; color: var(--pink); }
 
-  .result-card {
-    background: linear-gradient(160deg, rgba(30,18,55,0.85), rgba(15,8,32,0.9));
+  .result-card { background: linear-gradient(160deg, rgba(30,18,55,0.85), rgba(15,8,32,0.9));
     border: 2px solid var(--pink); border-radius: 26px;
     padding: 34px 24px; text-align: center; margin-bottom: 20px;
     position: relative; overflow: hidden;
     box-shadow: 0 0 40px rgba(255,61,154,0.35), 0 0 80px rgba(168,85,247,0.2);
-    backdrop-filter: blur(20px);
-  }
-  .result-card::before {
-    content: ''; position: absolute; inset: -80%;
+    backdrop-filter: blur(20px); }
+  .result-card::before { content: ''; position: absolute; inset: -80%;
     background: conic-gradient(from 0deg, transparent, rgba(255,61,154,0.25), transparent, rgba(168,85,247,0.25), transparent, rgba(0,229,196,0.15), transparent);
-    animation: rotate 10s linear infinite;
-  }
+    animation: rotate 10s linear infinite; }
   @keyframes rotate { to { transform: rotate(360deg); } }
   .result-inner { position: relative; z-index: 1; }
   .result-emoji { font-size: 88px; margin-bottom: 8px; display: block;
     animation: pop .8s cubic-bezier(.34,1.56,.64,1);
     filter: drop-shadow(0 0 30px rgba(255,61,154,0.7)); }
   @keyframes pop { 0% { transform: scale(0) rotate(-30deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
-  .result-tier {
-    font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px;
+  .result-tier { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px;
     background: linear-gradient(135deg, #ff3d9a, #a855f7, #00e5c4);
     background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
-    color: transparent; animation: hue 4s ease infinite;
-  }
-  .result-score {
-    font-family: 'Caveat', cursive; font-size: 76px; font-weight: 700;
+    color: transparent; animation: hue 4s ease infinite; }
+  .result-score { font-family: 'Caveat', cursive; font-size: 76px; font-weight: 700;
     line-height: 1; margin: 6px 0;
     background: linear-gradient(135deg, #ff3d9a, #ffd166);
     -webkit-background-clip: text; background-clip: text; color: transparent;
-    filter: drop-shadow(0 0 30px rgba(255,61,154,0.6));
-  }
+    filter: drop-shadow(0 0 30px rgba(255,61,154,0.6)); }
   .result-label { font-size: 12px; font-weight: 800; color: var(--muted);
     text-transform: uppercase; letter-spacing: 0.14em; }
   .result-desc { color: var(--muted); font-size: 15px; margin-top: 14px; }
 
-  .viral {
-    background: linear-gradient(135deg, rgba(255,61,154,0.15), rgba(168,85,247,0.15));
+  .viral { background: linear-gradient(135deg, rgba(255,61,154,0.15), rgba(168,85,247,0.15));
     border: 1.5px solid rgba(255,61,154,0.45);
     border-radius: 22px; padding: 24px 22px; margin: 18px 0; text-align: center;
-    box-shadow: 0 0 32px rgba(255,61,154,0.2);
-    backdrop-filter: blur(12px);
-  }
+    box-shadow: 0 0 32px rgba(255,61,154,0.2); backdrop-filter: blur(12px); }
   .viral h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
   .viral p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
-  .viral .pulse-emoji {
-    font-size: 56px; margin-bottom: 12px; line-height: 1;
+  .viral .pulse-emoji { font-size: 56px; margin-bottom: 12px; line-height: 1;
     display: inline-block; animation: bounce 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(255,61,154,0.6));
-  }
+    filter: drop-shadow(0 0 20px rgba(255,61,154,0.6)); }
 
-  .share-box {
-    background: rgba(15,8,32,0.8); border: 2px dashed rgba(255,61,154,0.5);
+  .share-box { background: rgba(15,8,32,0.8); border: 2px dashed rgba(255,61,154,0.5);
     border-radius: 18px; padding: 16px; margin-bottom: 16px;
     word-break: break-all; font-size: 13px; color: #ff87be;
-    font-family: ui-monospace, Menlo, monospace; font-weight: 700;
-    text-align: center;
-  }
+    font-family: ui-monospace, Menlo, monospace; font-weight: 700; text-align: center; }
   .share-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .wa-btn { background: linear-gradient(135deg, #25d366, #128c4a); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+  .wa-btn { background: linear-gradient(135deg, #25d366, #128c4a);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
 
-  .toast {
-    position: fixed; bottom: 24px; left: 50%;
+  .toast { position: fixed; bottom: 24px; left: 50%;
     transform: translateX(-50%) translateY(20px);
     background: linear-gradient(135deg, rgba(30,18,55,0.95), rgba(20,12,42,0.95));
     color: #fff; padding: 14px 22px; border-radius: 16px;
     font-size: 14px; font-weight: 700; opacity: 0;
     transition: all .3s ease; pointer-events: none; z-index: 200;
     border: 1.5px solid rgba(255,61,154,0.5);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 32px rgba(255,61,154,0.3);
-    max-width: 90%;
-  }
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 32px rgba(255,61,154,0.3); max-width: 90%; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; display: none; }
+
+  .sound-toggle { position: fixed; top: 16px; right: 16px; z-index: 50;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--glass); border: 1.5px solid var(--line);
+    color: var(--txt); font-size: 18px; cursor: pointer;
+    backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; }
 
   footer { text-align: center; color: var(--muted); font-size: 12px; padding: 30px 0 10px; }
   footer span { background: linear-gradient(135deg, #ff3d9a, #a855f7);
@@ -254,9 +202,10 @@
 </head>
 <body>
 
+<button class="sound-toggle" id="soundToggle" title="Toggle sound">🔊</button>
+
 <div class="app">
 
-  <!-- HOME -->
   <div class="view active" id="v-home">
     <div class="brand">KnowMe ✧</div>
     <div class="hero"><span>💌</span><span>🫶</span><span>💫</span></div>
@@ -270,7 +219,6 @@
     </div>
   </div>
 
-  <!-- CREATE -->
   <div class="view" id="v-create">
     <div class="brand">KnowMe ✧</div>
     <h2>Set up ✨</h2>
@@ -289,7 +237,6 @@
     <button class="btn btn-primary" id="startQ">Start →</button>
   </div>
 
-  <!-- SETUP -->
   <div class="view" id="v-setup">
     <div class="progress"><div class="progress-fill" id="sProg"></div></div>
     <div class="qnum" id="sNum">Question 1 of 10</div>
@@ -298,16 +245,18 @@
     <button class="btn btn-primary" id="sNext">Next →</button>
   </div>
 
-  <!-- SHARE -->
   <div class="view" id="v-share">
     <div class="brand">KnowMe ✧</div>
     <div class="hero"><span>🎉</span><span>💌</span><span>✨</span></div>
     <h2 class="center">Your quiz is ready!</h2>
-    <p class="sub center">Send this link. No signup, no app, just tap.</p>
+    <p class="sub center">Send this short link. No signup, no app, just tap.</p>
     <div class="share-box" id="shareLink">…</div>
     <div class="share-row">
       <button class="btn wa-btn btn-sm" id="waShare">💬 WhatsApp</button>
       <button class="btn btn-ghost btn-sm" id="copyLink">📋 Copy</button>
+    </div>
+    <div class="share-row">
+      <button class="btn btn-ghost btn-sm" id="viewMyDash" style="grid-column: 1 / -1;">👀 See who answered</button>
     </div>
     <div class="viral" style="margin-top:20px;">
       <div class="pulse-emoji">💡</div>
@@ -316,14 +265,12 @@
     </div>
   </div>
 
-  <!-- PLAY -->
   <div class="view" id="v-play">
     <div class="progress"><div class="progress-fill" id="pProg"></div></div>
     <div class="qnum" id="pNum">Question 1</div>
     <div id="pWrap"></div>
   </div>
 
-  <!-- RESULT -->
   <div class="view" id="v-result">
     <div class="result-card">
       <div class="result-inner">
@@ -353,6 +300,15 @@
     </div>
   </div>
 
+  <div class="view" id="v-dash">
+    <div class="brand">KnowMe ✧</div>
+    <h2>Who answered 💌</h2>
+    <p class="sub">Your quiz responses.</p>
+    <div id="dashSum"></div>
+    <div id="dashList"></div>
+    <button class="btn btn-ghost btn-sm" id="backShare" style="margin-top:10px; width:100%;">← Back to share</button>
+  </div>
+
   <footer>Made with <span>💖</span> · KnowMe</footer>
 </div>
 
@@ -361,11 +317,17 @@
 
 <script>
 /* ============================================================
-   KnowMe — no backend edition
-   Quiz data URL mein encoded — base64(JSON)
+   CONFIG — Upstash credentials filled in
    ============================================================ */
+const CONFIG = {
+  UPSTASH_URL: "https://evolved-chimp-224053.upstash.io",
+  UPSTASH_TOKEN: "gQAAAAAAA2s1AAIgcDI1MzI1Y2MxMjc4NDI0ZTlhYjQ3ZDRiMzIyOTUzMWRiYg",
+  SITE_URL: location.origin + location.pathname
+};
 
-/* ------- QUESTION POOL ------- */
+/* ============================================================
+   QUESTION POOL
+   ============================================================ */
 const POOL = [
   { e: "🍜", q: "My comfort food?",             o: ["Pizza", "Maggi", "Biryani", "Momos"] },
   { e: "✈️", q: "My dream travel destination?", o: ["Paris", "Bali", "Japan", "Dubai"] },
@@ -411,25 +373,24 @@ const POOL = [
   { e: "🍫", q: "Chocolate brand?",             o: ["Dairy Milk", "KitKat", "5 Star", "Don't care"] },
   { e: "🕹️", q: "PC or mobile?",                o: ["PC", "Mobile", "Console", "None"] },
   { e: "🎨", q: "Do I text first?",             o: ["Text first", "Wait", "Depends", "Never text"] },
-  { e: "🥶", q: "Ice cream or cake?",           o: ["Ice cream", "Cake", "Both", "Neither"] },
   { e: "🌺", q: "My favorite season?",          o: ["Summer", "Winter", "Monsoon", "Spring"] },
   { e: "🎪", q: "Best mood lifter?",            o: ["Music", "Food", "Friends", "Sleep"] },
-  { e: "🧋", q: "Chai or coffee?",              o: ["Chai", "Coffee", "Both", "Neither"] },
   { e: "📖", q: "Am I a night owl?",            o: ["Yes", "No", "Sometimes", "Always tired"] },
   { e: "🌸", q: "My spirit animal?",            o: ["Cat", "Dog", "Panda", "Wolf"] }
 ];
 
-/* ------- TIERS ------- */
 const TIERS = [
   { min: .95, e: "💖", t: "Soulmate Energy",  d: "You know me better than I know myself." },
   { min: .75, e: "✨", t: "Bestie Certified", d: "Real one. You actually pay attention." },
   { min: .55, e: "🌸", t: "Good Friend",      d: "Solid. A few blind spots, but vibe is there." },
-  { min: .35, e: "🍃", t: "Still Learning",   d: "Getting there. A few more late-night chats needed." },
+  { min: .35, e: "🍃", t: "Still Learning",   d: "Getting there. A few more late-night chats." },
   { min: .15, e: "😅", t: "Acquaintance Mode",d: "Hmm. We should hang out more, clearly." },
   { min: 0,   e: "💀", t: "Who Even Are You?",d: "Not a single one right. We need to talk." }
 ];
 
-/* ------- HELPERS ------- */
+/* ============================================================
+   HELPERS
+   ============================================================ */
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shuffle = a => { const r = [...a]; for (let i = r.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; } return r; };
@@ -441,67 +402,175 @@ function toast(m) {
   clearTimeout(t._t);
   t._t = setTimeout(() => t.classList.remove("show"), 2000);
 }
-
 function show(v) {
   document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
   $("v-" + v).classList.add("active");
   window.scrollTo(0, 0);
 }
-
-/* ------- URL ENCODING (quiz data in link) ------- */
-function encodeQuiz(data) {
-  // unicode-safe base64
-  const json = JSON.stringify(data);
-  const b64 = btoa(unescape(encodeURIComponent(json)));
-  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-function decodeQuiz(s) {
-  try {
-    let b64 = s.replace(/-/g, "+").replace(/_/g, "/");
-    while (b64.length % 4) b64 += "=";
-    const json = decodeURIComponent(escape(atob(b64)));
-    return JSON.parse(json);
-  } catch (e) { return null; }
+function shortId() {
+  const c = "abcdefghjkmnpqrstuvwxyz23456789";
+  let s = "";
+  for (let i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)];
+  return s;
 }
 
-/* ------- STATE ------- */
+/* ============================================================
+   SOUND
+   ============================================================ */
+const Sound = (() => {
+  let ctx;
+  let enabled = localStorage.getItem("km.sound") !== "0";
+  function init() {
+    if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch {} }
+    if (ctx && ctx.state === "suspended") ctx.resume();
+  }
+  function tone(freq, dur, type = "sine", vol = 0.15, delay = 0) {
+    if (!enabled || !ctx) return;
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = type; o.frequency.value = freq;
+    o.connect(g); g.connect(ctx.destination);
+    const t = ctx.currentTime + delay;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.start(t); o.stop(t + dur + 0.02);
+  }
+  function noise(dur, vol = 0.08) {
+    if (!enabled || !ctx) return;
+    const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+    const s = ctx.createBufferSource(); s.buffer = buf;
+    const g = ctx.createGain(); g.gain.value = vol;
+    const f = ctx.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 800; f.Q.value = 0.7;
+    s.connect(f); f.connect(g); g.connect(ctx.destination); s.start();
+  }
+  return {
+    init,
+    tap: () => { init(); tone(720, 0.05, "sine", 0.06); },
+    correct: () => { init(); tone(523, 0.14, "sine", 0.12); tone(784, 0.22, "sine", 0.12, 0.09); },
+    wrong: () => { init(); tone(180, 0.18, "triangle", 0.08); tone(140, 0.22, "triangle", 0.06, 0.1); },
+    result: () => { init(); tone(523, 0.2, "sine", 0.11); tone(659, 0.2, "sine", 0.11, 0.14); tone(880, 0.34, "sine", 0.13, 0.28); },
+    whoosh: () => { init(); noise(0.4, 0.07); },
+    toggle: () => {
+      enabled = !enabled;
+      localStorage.setItem("km.sound", enabled ? "1" : "0");
+      $("soundToggle").textContent = enabled ? "🔊" : "🔇";
+      return enabled;
+    },
+    isOn: () => enabled
+  };
+})();
+
+/* ============================================================
+   UPSTASH
+   ============================================================ */
+let DEMO = false;
+async function redis(...cmd) {
+  if (DEMO) return demoRedis(cmd);
+  const res = await fetch(CONFIG.UPSTASH_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cmd)
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.result;
+}
+async function pipe(cmds) {
+  if (DEMO) return Promise.all(cmds.map(c => demoRedis(c)));
+  const res = await fetch(`${CONFIG.UPSTASH_URL}/pipeline`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${CONFIG.UPSTASH_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cmds)
+  });
+  const data = await res.json();
+  return data;
+}
+function demoRedis(cmd) {
+  const op = cmd[0].toUpperCase();
+  const store = window.__demo || (window.__demo = { kv: {}, lists: {} });
+  if (op === "SET") { store.kv[cmd[1]] = cmd[2]; return "OK"; }
+  if (op === "GET") return store.kv[cmd[1]] ?? null;
+  if (op === "INCR") { store.kv[cmd[1]] = String((parseInt(store.kv[cmd[1]]) || 0) + 1); return parseInt(store.kv[cmd[1]]); }
+  if (op === "SADD") { store.lists[cmd[1]] = store.lists[cmd[1]] || new Set(); store.lists[cmd[1]].add(cmd[2]); return 1; }
+  if (op === "RPUSH") { store.lists[cmd[1]] = store.lists[cmd[1]] || []; store.lists[cmd[1]].push(cmd[2]); return store.lists[cmd[1]].length; }
+  if (op === "LRANGE") return store.lists[cmd[1]] || [];
+  if (op === "SMEMBERS") return Array.from(store.lists[cmd[1]] || []);
+  if (op === "DEL") { delete store.kv[cmd[1]]; delete store.lists[cmd[1]]; return 1; }
+  return null;
+}
+
+/* ============================================================
+   QUIZ OPS
+   ============================================================ */
+async function saveQuiz(quiz) {
+  await pipe([
+    ["SET", `quiz:${quiz.id}`, JSON.stringify(quiz)],
+    ["SADD", "quizzes:all", quiz.id],
+    ["INCR", "stats:quizzes"]
+  ]);
+}
+async function getQuiz(id) {
+  const raw = await redis("GET", `quiz:${id}`);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+}
+async function saveResponse(quizId, resp) {
+  await pipe([
+    ["RPUSH", `resp:${quizId}`, JSON.stringify(resp)],
+    ["INCR", "stats:responses"]
+  ]);
+}
+async function getResponses(quizId) {
+  const raws = await redis("LRANGE", `resp:${quizId}`, 0, -1);
+  if (!Array.isArray(raws)) return [];
+  return raws.map(r => { try { return JSON.parse(r); } catch { return null; } }).filter(Boolean);
+}
+
+/* ============================================================
+   STATE
+   ============================================================ */
 const state = {
   name: "", seed: "", questions: [], idx: 0,
-  playQuiz: null, playIdx: 0, playScore: 0, shuffledOpts: []
+  quizId: null,
+  playQuiz: null, playIdx: 0, playScore: 0, shuffledOpts: [], playerName: ""
 };
 
-/* ------- BOOT — check URL for #/play/BASE64 ------- */
+/* ============================================================
+   ROUTER
+   ============================================================ */
 function boot() {
-  const h = window.location.hash;
-  const m = h.match(/^#\/play\/(.+)$/);
-  if (m) {
-    const data = decodeQuiz(m[1]);
-    if (data && data.q && data.q.length) {
-      startPlay(data);
-      return;
-    }
-    toast("Quiz link is broken 💔");
-  }
+  const h = location.hash;
+  let m;
+  if ((m = h.match(/^#\/play\/([a-z0-9]+)$/i))) { openPlay(m[1]); return; }
+  if ((m = h.match(/^#\/dash\/([a-z0-9]+)$/i))) { openDash(m[1]); return; }
+  if (h === "#/create") { startCreate(); return; }
   show("home");
 }
 window.addEventListener("hashchange", boot);
 
 /* ============================================================
-   CREATE FLOW
+   CREATE
    ============================================================ */
-$("goCreate").onclick = () => {
+function startCreate() {
   state.seed = "s" + Date.now();
   $("avImg").src = avatar(state.seed);
   show("create");
-};
-$("shuffleAv").onclick = () => {
-  state.seed = "s" + Date.now();
-  $("avImg").src = avatar(state.seed);
-};
+}
+$("goCreate").onclick = () => { Sound.tap(); startCreate(); };
+$("shuffleAv").onclick = () => { Sound.tap(); state.seed = "s" + Date.now(); $("avImg").src = avatar(state.seed); };
 
 $("startQ").onclick = () => {
   const n = $("myName").value.trim();
   if (!n || n.length < 2) { toast("Enter your name"); return; }
+  Sound.tap();
   state.name = n;
   state.questions = pick(10);
   state.idx = 0;
@@ -510,12 +579,11 @@ $("startQ").onclick = () => {
 };
 
 function pick(n) {
-  return shuffle(POOL).slice(0, n).map(q => ({
-    e: q.e, q: q.q, o: [...q.o], c: null
-  }));
+  return shuffle(POOL).slice(0, n).map(q => ({ e: q.e, q: q.q, o: [...q.o], c: null }));
 }
 
 $("shuffleQ").onclick = () => {
+  Sound.tap();
   const anyAns = state.questions.some(x => x.c);
   if (anyAns && !confirm("Reset all answers?")) return;
   state.questions = pick(10);
@@ -545,6 +613,7 @@ function renderSetup() {
   `;
   document.querySelectorAll("#sOpts .option").forEach(b => {
     b.onclick = () => {
+      Sound.tap();
       document.querySelectorAll("#sOpts .option").forEach(x => x.classList.remove("selected"));
       b.classList.add("selected");
       state.questions[i].c = q.o[parseInt(b.dataset.idx)];
@@ -555,67 +624,91 @@ function renderSetup() {
   $("sNext").textContent = (i === state.questions.length - 1) ? "Finish 💖" : "Next →";
 }
 
-$("sNext").onclick = () => {
+$("sNext").onclick = async () => {
   if (!state.questions[state.idx].c) return;
+  Sound.tap();
   if (state.idx < state.questions.length - 1) {
     state.idx++;
     renderSetup();
   } else {
-    finishCreate();
+    await finishCreate();
   }
 };
 
-function finishCreate() {
-  const payload = {
-    n: state.name,
-    a: state.seed,
-    q: state.questions.map(x => ({ e: x.e, q: x.q, o: x.o, c: x.c }))
+async function finishCreate() {
+  $("sNext").innerHTML = '<span style="opacity:.6">Creating…</span>';
+  const id = shortId();
+  const quiz = {
+    id, creator: state.name, avatar_seed: state.seed,
+    questions: state.questions, created_at: Date.now()
   };
-  const code = encodeQuiz(payload);
-  const link = `${location.origin}${location.pathname}#/play/${code}`;
-  $("shareLink").textContent = link;
-  show("share");
+  try {
+    await saveQuiz(quiz);
+    state.quizId = id;
+    $("shareLink").textContent = `${CONFIG.SITE_URL}#/play/${id}`;
+    show("share");
+    Sound.result();
+    try { localStorage.setItem("km.myLast", id); } catch {}
+  } catch (e) {
+    console.error(e);
+    toast("Save failed. Check Upstash config.");
+  }
+  $("sNext").textContent = "Finish 💖";
 }
 
 /* ============================================================
    SHARE
    ============================================================ */
 $("waShare").onclick = () => {
+  Sound.tap();
   const link = $("shareLink").textContent;
   const msg = `💌 mujhe kitna jaanta hai?\n\n10 sawaal, 1 minute. Fatafat try kar 👇\n${link}\n\nps: tu bhi bana sakta hai apna 🌸`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
 };
-
 $("copyLink").onclick = async () => {
+  Sound.tap();
   try {
     await navigator.clipboard.writeText($("shareLink").textContent);
     toast("Link copied 💫");
   } catch { toast("Long-press to copy"); }
 };
+$("viewMyDash").onclick = () => {
+  Sound.tap();
+  if (!state.quizId) return;
+  location.hash = `#/dash/${state.quizId}`;
+};
 
 /* ============================================================
-   PLAY FLOW
+   PLAY
    ============================================================ */
-function startPlay(data) {
-  state.playQuiz = data;
+async function openPlay(id) {
+  show("play");
+  $("pWrap").innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px 0;">Loading quiz…</p>';
+  let quiz;
+  try { quiz = await getQuiz(id); }
+  catch (e) { console.error(e); quiz = null; }
+  if (!quiz || !quiz.questions?.length) {
+    $("pWrap").innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px 0;">Quiz not found 💔<br>Ask your friend for a new link.</p>';
+    return;
+  }
+  state.playQuiz = quiz;
   state.playIdx = 0;
   state.playScore = 0;
-  state.shuffledOpts = data.q.map(x => shuffle(x.o));
-  show("play");
+  state.shuffledOpts = quiz.questions.map(x => shuffle(x.o));
   renderPlayIntro();
 }
 
 function renderPlayIntro() {
   const d = state.playQuiz;
-  $("pNum").textContent = `${esc(d.n)}'s quiz`;
+  $("pNum").textContent = `${esc(d.creator)}'s quiz`;
   $("pProg").style.width = "0%";
   $("pWrap").innerHTML = `
     <div style="text-align:center;padding:20px 0 12px;">
-      <img src="${avatar(d.a || d.n)}" style="width:120px;height:120px;border-radius:50%;border:3px solid rgba(255,61,154,0.5);box-shadow:0 0 32px rgba(255,61,154,0.5),0 0 64px rgba(168,85,247,0.3);" />
+      <img src="${avatar(d.avatar_seed || d.creator)}" style="width:120px;height:120px;border-radius:50%;border:3px solid rgba(255,61,154,0.5);box-shadow:0 0 32px rgba(255,61,154,0.5),0 0 64px rgba(168,85,247,0.3);" />
       <div style="font-family:'Caveat',cursive;font-size:34px;margin-top:14px;background:linear-gradient(135deg,#ff3d9a,#a855f7,#00e5c4);-webkit-background-clip:text;background-clip:text;color:transparent;">
-        ${esc(d.n)}'s quiz
+        ${esc(d.creator)}'s quiz
       </div>
-      <div style="color:var(--muted);font-size:15px;margin-top:6px;">${d.q.length} questions. Guess their answers.</div>
+      <div style="color:var(--muted);font-size:15px;margin-top:6px;">${d.questions.length} questions. Guess their answers.</div>
     </div>
     <div class="card" style="margin-top:20px;">
       <div class="field" style="margin-bottom:0;">
@@ -628,15 +721,17 @@ function renderPlayIntro() {
   $("pStart").onclick = () => {
     const n = $("pName").value.trim();
     if (!n || n.length < 2) { toast("Enter your name"); return; }
+    Sound.tap();
+    state.playerName = n;
     renderPlayQ();
   };
 }
 
 function renderPlayQ() {
   const i = state.playIdx;
-  const q = state.playQuiz.q[i];
+  const q = state.playQuiz.questions[i];
   const opts = state.shuffledOpts[i];
-  const total = state.playQuiz.q.length;
+  const total = state.playQuiz.questions.length;
   $("pNum").textContent = `Question ${i+1} of ${total}`;
   $("pProg").style.width = (i / total * 100) + "%";
   $("pWrap").innerHTML = `
@@ -656,7 +751,8 @@ function renderPlayQ() {
         if (x.textContent === correct) x.classList.add("correct");
         else if (x === b) x.classList.add("wrong");
       });
-      if (right) state.playScore++;
+      if (right) { state.playScore++; Sound.correct(); }
+      else Sound.wrong();
       setTimeout(() => {
         state.playIdx++;
         if (state.playIdx < total) renderPlayQ();
@@ -666,9 +762,9 @@ function renderPlayQ() {
   });
 }
 
-function finishPlay() {
+async function finishPlay() {
   $("pProg").style.width = "100%";
-  const total = state.playQuiz.q.length;
+  const total = state.playQuiz.questions.length;
   const score = state.playScore;
   const pct = score / total;
   const tier = TIERS.find(t => pct >= t.min);
@@ -677,34 +773,93 @@ function finishPlay() {
   $("rScore").textContent = `${score}/${total}`;
   $("rDesc").textContent = tier.d;
   show("result");
-  if (pct >= 0.7) confetti();
+  setTimeout(() => Sound.result(), 150);
+  if (pct >= 0.7) { setTimeout(() => { Sound.whoosh(); confetti(); }, 400); }
+  try {
+    await saveResponse(state.playQuiz.id, {
+      guesser: state.playerName,
+      score, total,
+      at: Date.now()
+    });
+  } catch (e) { console.error("resp save failed", e); }
 }
 
 /* ============================================================
-   RESULT ACTIONS
+   RESULT
    ============================================================ */
 $("makeMine").onclick = () => {
-  state.seed = "s" + Date.now();
-  $("myName").value = "";
-  $("avImg").src = avatar(state.seed);
-  window.location.hash = "";
-  show("create");
+  Sound.tap();
+  location.hash = "";
+  setTimeout(() => startCreate(), 50);
 };
-
 $("challenge").onclick = () => {
-  const total = state.playQuiz.q.length;
+  Sound.tap();
+  const total = state.playQuiz.questions.length;
   const pct = state.playScore / total;
   const tier = TIERS.find(t => pct >= t.min);
-  const link = window.location.href;
-  const msg = `🔥 Challenge 🔥\n\nMaine ${state.playQuiz.n} ka quiz try kiya and got "${tier.t}" ${tier.e} (${state.playScore}/${total}).\n\nTu try kar — dekh kitna jaanta hai unhe 👇\n${link}`;
+  const link = location.href;
+  const msg = `🔥 Challenge 🔥\n\nMaine ${state.playQuiz.creator} ka quiz try kiya and got "${tier.t}" ${tier.e} (${state.playScore}/${total}).\n\nTu try kar — dekh kitna jaanta hai unhe 👇\n${link}`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
 };
-
 $("again").onclick = () => {
+  Sound.tap();
   state.playIdx = 0; state.playScore = 0;
-  state.shuffledOpts = state.playQuiz.q.map(x => shuffle(x.o));
+  state.shuffledOpts = state.playQuiz.questions.map(x => shuffle(x.o));
   renderPlayIntro();
   show("play");
+};
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+async function openDash(id) {
+  show("dash");
+  $("dashSum").innerHTML = "";
+  $("dashList").innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Loading…</p>';
+  let rs = [], quiz = null;
+  try {
+    rs = await getResponses(id);
+    quiz = await getQuiz(id);
+  } catch (e) { console.error(e); }
+  const total = quiz?.questions?.length || 10;
+
+  if (!rs.length) {
+    $("dashList").innerHTML = `
+      <div style="text-align:center;padding:40px 20px;color:var(--muted);">
+        <div style="font-size:48px;margin-bottom:10px;">💌</div>
+        No responses yet.<br>Share your link on Instagram story!
+      </div>`;
+    return;
+  }
+  const avg = (rs.reduce((s, r) => s + r.score, 0) / rs.length).toFixed(1);
+  $("dashSum").innerHTML = `
+    <div class="card" style="text-align:center;">
+      <div style="font-family:'Caveat',cursive;font-size:68px;line-height:1;background:linear-gradient(135deg,#ff3d9a,#a855f7,#00e5c4);-webkit-background-clip:text;background-clip:text;color:transparent;">${rs.length}</div>
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;">Total responses</div>
+      <div style="margin-top:8px;font-weight:700;color:var(--muted);">Average: <span style="color:#ff87be;">${avg}/${total}</span></div>
+    </div>
+  `;
+  $("dashList").innerHTML = rs.reverse().map((r, i) => {
+    const t = TIERS.find(x => (r.score / (r.total || total)) >= x.min) || TIERS[TIERS.length - 1];
+    return `
+      <div style="display:flex;justify-content:space-between;align-items:center;background:var(--glass);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px;">
+        <img src="${avatar(r.guesser || 'anon' + i)}" style="width:44px;height:44px;border-radius:50%;background:#1c1038;border:1.5px solid rgba(255,61,154,0.4);" />
+        <div style="flex:1;margin-left:12px;">
+          <div style="font-weight:800;font-size:15px;">${esc(r.guesser || "Anonymous")}</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;">${new Date(r.at || Date.now()).toLocaleString()}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:22px;">${t.e}</div>
+          <div style="font-weight:800;font-size:16px;background:linear-gradient(135deg,#ff3d9a,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent;">${r.score}/${r.total || total}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+$("backShare").onclick = () => {
+  Sound.tap();
+  if (state.quizId) { location.hash = ""; show("share"); }
+  else location.hash = "";
 };
 
 /* ============================================================
@@ -715,7 +870,7 @@ function confetti() {
   c.style.display = "block";
   c.width = innerWidth; c.height = innerHeight;
   const ctx = c.getContext("2d");
-  const parts = Array.from({ length: 90 }, () => ({
+  const parts = Array.from({ length: 100 }, () => ({
     x: Math.random()*c.width, y: -20,
     r: Math.random()*6+3, d: Math.random()*3+2,
     col: ["#ff3d9a","#a855f7","#00e5c4","#ffd166","#7ee0c1"][Math.floor(Math.random()*5)],
@@ -738,7 +893,11 @@ function confetti() {
   })();
 }
 
-/* boot */
+/* ============================================================
+   BOOT
+   ============================================================ */
+$("soundToggle").textContent = Sound.isOn() ? "🔊" : "🔇";
+$("soundToggle").onclick = () => { Sound.toggle(); Sound.tap(); };
 boot();
 </script>
 </body>
